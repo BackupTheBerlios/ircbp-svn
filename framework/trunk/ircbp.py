@@ -3,6 +3,8 @@
 # Some Portions are copyright to Gian Mario Tagliaretti, portions of his code will be replaced shortly	#
 #########################################################################################################
 
+# $Id #
+
 #################################################
 # The main developers are:			#
 #	Nigel Jones <nigelj@users.berlios.de>	#
