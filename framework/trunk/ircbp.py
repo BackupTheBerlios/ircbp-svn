@@ -127,7 +127,7 @@ while (1):
 	    irccommand("PART " + CHANNEL)
 	    irccommand("JOIN " + CHANNEL)
 	    irccommand("PRIVMSG " + CHANNEL + " :Did you miss me?")
-	    if string.lstrip(msg[3], ':') == '!quit':
+	if string.lstrip(msg[3], ':') == '!quit':
 	    print "It's a quit"
 	    irccommand("QUIT :Quit from " + nick_name)
 	    print "Sent quit message, exiting"
