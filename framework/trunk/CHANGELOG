@@ -1,0 +1,12 @@
+# Change Log - Format to be decided
+# Dates are in GMT and in DD/MM/YY format
+
+NJ - 30/09/04 - Various work on core code.
+NJ - 01/10/04 - Added quite a few comments to the source code.
+NJ - 01/10/04 - Removed some old code + made the source format look prettier! (looks good on a 8-COL Tab Text Editor)
+NJ - 01/10/04 - Added more if's to check that we are not tring to access non existant data!
+NJ - 01/10/04 - Had some empty else's in the source, caused some runtime problems, fixed that.
+NJ - 01/10/04 - Add some Privledge checking because well truth be told AppleBoy was starting to semi-annoy me by using the !kick command when I didn't want him to.  Will be replaced by Pankey's system soon.
+NJ - 01/10/04 - Implementing Changelog and used SVN History to create past events.
+NJ - 01/10/04 - Starting a system like the Privledge system to join Multiple Channels.
+NJ - 01/10/04 - Channel System is done, needs lots of testing.  I think i'll leave programming at that for now.

@@ -26,7 +26,30 @@
 
 import socket, string, sys, time
 
+# Introduce Privledged User System
+
 privledged = []
+
+def adduser(nick_name):
+    privledged.append(nick_name)
+
+# Introduce Channel System
+
+channels = []
+
+def addchan(CHANNEL):
+    channels.append(CHANNEL)
+
+# Introduce Users allowed to control "powerful" features
+# Features include !quit, !topic, !kick, !cycle
+
+adduser('Nigel')
+adduser('Jorge-Kersh')
+
+# Add Channels
+
+addchan('#IRCBP')
+addchan('#distro-project')
 
 # Connection Details
 # In future this should be in a seperate file!
@@ -45,10 +68,9 @@ NICKNAME = 'IRCBP'
 
 # Channel for the IRC Bot to join on connect (only channel at this moment that it will listen to
 # Will be made into an array soon
-CHANNEL = '#IRCBP'
+#CHANNEL = '#IRCBP'
 
-privledged.append('Nigel')
-privledged.append('Jorge-Kersh')
+
 
 ### CODE STARTS HERE ###
 
@@ -66,8 +88,19 @@ def irccommand(command):
     IRC.send(command + '\n')
 
 #join the channel
-def ircjoin(channel):
-    irccommand("JOIN %s" % channel)
+#def ircjoin(channel):
+#    irccommand("JOIN %s" % channel)
+
+def dojoins():
+    print "dojoins called"
+    x = 0
+    print "Starting the loop"
+    while (len(channels)-1 >= x):
+	print "The loop is going to join the channel in channels[" + str(x) + "] which is " + channels[x]
+	irccommand("JOIN " + channels[x])
+	x = x+1
+    print "dojoins Complete!"
+
 
 #send login data (customizable)
 def irclogin(nickname, username='pbot', password = SVRPASSWORD, realname='Nigels PBot', hostname='Nigel', servername='Freenode'):
@@ -79,6 +112,9 @@ def irclogin(nickname, username='pbot', password = SVRPASSWORD, realname='Nigels
     #IRC "USER" RFC says: "USER Username Hostname Servername :Realname"
     irccommand("USER %s %s %s %s" % (username, hostname, servername, realname))
     irccommand("NICK " + nickname)
+
+
+# This function will check if a user is in the privledged[x] array
 
 def privcheck(USERTBC):
     print "User PrivCheck Called"
@@ -95,10 +131,29 @@ def privcheck(USERTBC):
     return 0
     print "No Matches"
 
+# This function will check if the channel is one the bot has joined
+
+def ischanmember(CHKCHANNEL):
+    print "ischanmember Called"
+    x = 0
+    print "Starting the loop"
+    while (len(channels)-1 >= x):
+	print "The loop is checking if we are in channels[" + str(x) + "] which is " + channels[x]
+	if channels[x] == CHKCHANNEL:
+	    print "We are in it!"
+	    return 1
+	else:
+	    #Keep going!
+	    x = x+1
+	    print "No match yet"
+    return 0
+    print "No matches"
+
 
 srvconnect()
 irclogin(NICKNAME)
-ircjoin(CHANNEL)
+#ircjoin(CHANNEL)
+dojoins()
 
 while (1):
     buffer = IRC.recv(1024)
@@ -114,7 +169,9 @@ while (1):
 	print "Sent by " + nick_name
 	message = ' '.join(msg[3:])
 	print "The message was: " + message
-    if msg[1] == 'PRIVMSG' and msg[2] == CHANNEL:
+    #if msg[1] == 'PRIVMSG' and ischanmember(msg[2]):
+    if msg[1] == 'PRIVMSG' and msg[2][0] == "#":
+	CHANNEL = msg[2]
 	if len(msg) > 3:
 	    print "We have a channel message! - W00T!!!"
 	    nick_name = string.lstrip(msg[0][:string.find(msg[0],"!")], ':')
