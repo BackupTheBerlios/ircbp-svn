@@ -168,6 +168,23 @@ def ischanmember(CHKCHANNEL):
 	    print "No match yet"
     return 0
     print "No matches"
+    
+def remchan(CHANNEL):
+    print "remchan Called"
+    x = 0
+    print "Starting the loop"
+    while (len(channels)-1 >= x):
+    	print "The loop is checking if the channel is a match @ channels[" + str(x) + "] which is " + channels[x]
+	if string.upper(channels[x]) == string.upper(CHANNEL):
+	    print "We are in it!"
+	    del channels[x]
+	    return 1
+	else:
+	    #Keep going!
+	    x = x+1
+	    print "No match yet"
+    return 0
+    print "No matches"
 
 #def isusingprefix(INDATA,COMMAND):
 #    print "Checking if command has a set prefix in it"
@@ -264,6 +281,13 @@ while (1):
 		    # They don't have privledges!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 
+	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!list'):
+		    x = 0
+		    print "Starting the loop"
+		    while (len(channels)-1 >= x):
+			irccommand("PRIVMSG " + CHANNEL + " :I am in: " + channels[x])
+			x = x+1
+		    
 	    # Join Command
 
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!join'):
@@ -302,15 +326,19 @@ while (1):
             # Part Command
 
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!part'):
-                partmessage = ' '.join(msg[4:])
 		if privcheck(HOSTMASK):
-		    print "Parting!"
-		    irccommand("PRIVMSG " + CHANNEL + " :buh-bye now! =)")
-		    irccommand("PART " + CHANNEL + " :Part from %s" % nick_name)
-		elif privcheck(HOSTMASK):
-                    print "Parting!"
-                    irccommand("PRIVMSG " + CHANNEL + " :buh-bye now! =)")
-		    irccommand("PART " + CHANNEL + " %s" % partmessage)
+		    if len(msg) > 4:
+			if msg[4][0] == "#":
+			    print "Parting!"
+			    irccommand("PRIVMSG " + msg[4] + " :buh-bye now! =)")
+			    irccommand("PART " + msg[4] + " :Part from %s" % nick_name)
+			    remchan(msg[4])
+			else:
+			    irccommand("PRIVMSG " + CHANNEL + " :" + msg[4] + " is not a channel")
+		    else:
+			irccommand("PRIVMSG " + CHANNEL + " :buh-bye now! =)")
+			irccommand("PART " + CHANNEL + " :Part from %s" % nick_name)
+			remchan(CHANNEL)
 		else:
 		    # Oh dear they tried to part our bot!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")

@@ -34,3 +34,6 @@ NJ - 09/10/04 - Added a temporary README
 NJ - 09/10/04 - Made REALNAME set by default to fix bug #2613 (Invalid IRC Parameters)
 NJ - 10/10/04 - Made irclogin() much more simple
 NJ - 10/10/04 - Added sendnickserv() so users can have their bot automatically identify to nickserv
+NJ - 13/11/04 - Added remchan() to reverse addchan()
+NJ - 13/11/04 - Added !list as a debugging tool (list channels the bot is on)
+NJ - 13/11/04 - Fixed !part to fix bug #2614 (!part Parts the wrong channel)
