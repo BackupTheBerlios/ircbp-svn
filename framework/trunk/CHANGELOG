@@ -26,3 +26,5 @@ NJ - 03/10/04 - Started to implement the ability to have multiple prefixes, sadl
 BP - 03/10/04 - Added a bash script to copy unix files to windows .txt format =)
 BP - 03/10/04 - Added !part command...realized this ChangeLog is backwards...should be top with newest changes
 NJ - 09/10/04 - Added the python interpreter line to top of ircbp.py
+NJ - 09/10/04 - Made the configuration stuff bit better to look at!
+NJ - 09/10/04 - Made some code more "tidy"

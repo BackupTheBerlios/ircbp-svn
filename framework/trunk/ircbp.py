@@ -24,47 +24,49 @@
 # GPL Document can also be found in the same directory as this file as "LICENSE"			#
 #########################################################################################################
 
+# Please scroll down to line 49 for start of configuration
+
 # Imports for sockets etc
 
 import socket, string, sys, time, fnmatch
 
-# Introduce Privledged User System
+# Introduce Arrays for Users/Channels and Prefixes
 
 privledged = []
+channels = []
+prefixes = []
 
+# Add functions for Users/Channels and Prefixes
 def addmask(HOSTMASK):
     privledged.append(HOSTMASK)
-
-# Introduce Channel System
-
-channels = []
 
 def addchan(CHANNEL):
     channels.append(CHANNEL)
 
-prefixes = []
-
 def addprefix(PREFIX):
     prefixes.append(PREFIX)
 
+#################################
+# CONFIGURATION STARTS HERE!	#
+#################################
+
 # Introduce Users allowed to control "powerful" features
 # Features include !quit, !topic, !kick, !cycle
-
 # Usage:
 # addmask('nick!ident@host')
-addmask('*!*@nigel.user')
-addmask('*!*@ghettobp19.user')
 
-# Add Channels
+addmask('*!*@*')
+
+# Channels that the bot will join by default
 
 addchan('#IRCBP')
 
-# Add Prefixes
+# Bot Nickname and Realname for the IRC Bot to use
 
-addprefix('!')
-addprefix('IBP.')
+NICKNAME = 'IRCBP'
+REALNAME = ''
 
-# Connection Details
+# Server Connection Details
 # In future this should be in a seperate file!
 
 # IRC Server DNS Name OR IP
@@ -76,11 +78,11 @@ PORT = 6667
 # Password for logining into the server (normally blank unless you have a special I:line)
 SVRPASSWORD = ''
 
-# Nickname for the IRC Bot to use
-NICKNAME = 'IRCBP'
 
-### CODE STARTS HERE ###
-
+#################################################################################
+# CODE STARTS HERE								#
+# It is strongly recommended that you do not touch anything below this point!	#
+#################################################################################
 
 # This basic socket will provide 1 connection to an IRC Server, in future we can most likely man it into an array
 # of sockets
@@ -110,14 +112,14 @@ def dojoins():
 
 
 #send login data (customizable)
-def irclogin(nickname, username='pbot', password = SVRPASSWORD, realname='Nigels PBot', hostname='Nigel', servername='Freenode'):
+def irclogin(nickname, username=NICKNAME, password = SVRPASSWORD, realname=REALNAME, hostname=NICKNAME, servername=SERVER):
     #We need to see if we need to send a password, so here we go
     if password != "":
 	#Pass Required so lets send it!
 	irccommand("PASS " + password)
 
     #IRC "USER" RFC says: "USER Username Hostname Servername :Realname"
-    irccommand("USER %s %s %s %s" % (username, hostname, servername, realname))
+    irccommand("USER %s %s %s :%s" % (username, hostname, servername, realname))
     irccommand("NICK " + nickname)
 
 
@@ -131,7 +133,6 @@ def privcheck(USERHOSTTBC):
 	print "The data we got is: " + USERHOSTTBC
 	print "The loop is checking privledged[" + str(x) + "] which is " + privledged[x]
 	if fnmatch.fnmatch(USERHOSTTBC,privledged[x]):
-	#if fnmatch.fnmatch('Nigel!~nigel@nigel.user','*!*@nigel.user'):
 	    print "OMG MATCH!"
 	    return 1
 	else:
@@ -158,21 +159,21 @@ def ischanmember(CHKCHANNEL):
     return 0
     print "No matches"
 
-def isusingprefix(INDATA,COMMAND):
-    print "Checking if command has a set prefix in it"
-    x = 0
-    print "Starting the loop"
-    while (len(prefixes)-1 >= x):
-	print "The loop is checking if the prefix in " + INDATA + " is using the prefix in prefixes[" + str(x) + "] which is " + prefixes[x]
-	if string.upper(prefixes[x] + COMMAND) == string.upper(INDATA):
-	    print "We are in it!"
-	    return 1
-	else:
-	    #Keep going!
-	    x = x+1
-	    print "No match yet"
-    return 0
-    print "No matches"
+#def isusingprefix(INDATA,COMMAND):
+#    print "Checking if command has a set prefix in it"
+#    x = 0
+#    print "Starting the loop"
+#    while (len(prefixes)-1 >= x):
+#	print "The loop is checking if the prefix in " + INDATA + " is using the prefix in prefixes[" + str(x) + "] which is " + prefixes[x]
+#	if string.upper(prefixes[x] + COMMAND) == string.upper(INDATA):
+#	    print "We are in it!"
+#	    return 1
+#	else:
+#	    #Keep going!
+#	    x = x+1
+#	    print "No match yet"
+#    return 0
+#    print "No matches"
 
 srvconnect()
 irclogin(NICKNAME)
@@ -206,7 +207,6 @@ while (1):
 	    # Say Command
 
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!say'):
-	    #if isusingprefix(string.lstrip(msg[3], ':'), 'say'):
 		print "We need to say something :P"
 		message = ' '.join(msg[4:])
 		irccommand("PRIVMSG " + CHANNEL + " :" + message)
@@ -229,9 +229,6 @@ while (1):
 	    # Kick Command
 
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!kick'):
-	    # msg[4] = channel
-	    # msg[5] = nickname
-	    # msg[6->] = reason
 		if privcheck(HOSTMASK) == 1:
 		    print "Someone's being bad, I need to kick!"
 		    #if msg[4] != '':
