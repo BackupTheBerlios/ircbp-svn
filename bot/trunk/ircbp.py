@@ -73,14 +73,18 @@ while (1):
                 # Say Command
     
                 if string.upper(string.lstrip(msg[3], ':')) == string.upper('!say'):
-                    print "We need to say something :P"
-                    message = ' '.join(msg[4:])
-                    ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :" + message)
+                    if ircbpcommon.privcheck(HOSTMASK, "U"):
+                        print "We need to say something :P"
+                        message = ' '.join(msg[4:])
+                        ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :" + message)
+                    else:
+                        # They don't have privledges!
+                        ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 
                 # Topic Command
 
                 if string.upper(string.lstrip(msg[3], ':')) == string.upper('!topic'):
-                    if ircbpcommon.privcheck(HOSTMASK):
+                    if ircbpcommon.privcheck(HOSTMASK, "O"):
                         if len(msg) > 4:
                             print "Changing Topic"
                             message = ' '.join(msg[4:])
@@ -95,7 +99,7 @@ while (1):
                 # Kick Command
     
                 if string.upper(string.lstrip(msg[3], ':')) == string.upper('!kick'):
-                    if ircbpcommon.privcheck(HOSTMASK) == 1:
+                    if ircbpcommon.privcheck(HOSTMASK, "O"):
                         print "Someone's being bad, I need to kick!"
                         #if msg[4] != '':
                         if len(msg) > 4:
@@ -132,13 +136,13 @@ while (1):
                 if string.upper(string.lstrip(msg[3], ':')) == string.upper('!join'):
                     print "Joining a channel!"
                     # Need to make sure that nick_name has in our privledged array
-                    if ircbpcommon.privcheck(HOSTMASK):
+                    if ircbpcommon.privcheck(HOSTMASK, "A"):
                         # He/She is, making sure that they provided a channel - We will need a string check on this too.
                         if len(msg) > 4:
                             # Something has being provided, need to make sure it is a channel for now by only checking if it has # at the start
                             if msg[4][0] == "#":
                                 # All ok, adding the channel to the array, JOIN sent normally because we have gone past the time of dojoin
-                                ircbpconfig.addchan(msg[4])
+                                ircbpcommon.addchan(msg[4])
                                 ircbpcommon.irccommand("JOIN " + msg[4])
                             else:
                                 # Not a channel, return error
@@ -152,7 +156,7 @@ while (1):
 	        # Cycle Command
     
 	        if string.upper(string.lstrip(msg[3], ':')) == string.upper('!cycle'):
-                    if ircbpcommon.privcheck(HOSTMASK):
+                    if ircbpcommon.privcheck(HOSTMASK, "A"):
                         print "Cycling!"
                         ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :Okie Doke!")
                         ircbpcommon.irccommand("PART " + CHANNEL)
@@ -165,19 +169,19 @@ while (1):
                 # Part Command
     
                 if string.upper(string.lstrip(msg[3], ':')) == string.upper('!part'):
-                    if ircbpcommon.privcheck(HOSTMASK):
+                    if ircbpcommon.privcheck(HOSTMASK, "A"):
                         if len(msg) > 4:
                             if msg[4][0] == "#":
                                 print "Parting!"
                                 ircbpcommon.irccommand("PRIVMSG " + msg[4] + " :buh-bye now! =)")
                                 ircbpcommon.irccommand("PART " + msg[4] + " :Part from %s" % nick_name)
-                                remchan(msg[4])
+                                ircbpcommon.remchan(msg[4])
                             else:
                                 ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :" + msg[4] + " is not a channel")
                         else:
                             ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :buh-bye now! =)")
                             ircbpcommon.irccommand("PART " + CHANNEL + " :Part from %s" % nick_name)
-                            remchan(CHANNEL)
+                            ircbpcommon.remchan(CHANNEL)
                     else:
                         # Oh dear they tried to part our bot!
                         ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
@@ -185,7 +189,7 @@ while (1):
                 # Quit Command
     
                 if string.upper(string.lstrip(msg[3], ':')) == string.upper('!quit'):
-                    if ircbpcommon.privcheck(HOSTMASK):
+                    if ircbpcommon.privcheck(HOSTMASK, "A"):
                         print "It's a quit"
                         ircbpcommon.irccommand("QUIT :Quit from " + nick_name)
                         print "Sent quit message, exiting"
@@ -210,7 +214,7 @@ while (1):
             #We can't join channels that are invite only
             print "The channel the bot just tried to join is invite only..."
             print "Removing from list"
-            remchan(msg[3])
+            ircbpcommon.remchan(msg[3])
             if len(ircbpconfig.CHANNELS) == 0:
                 print "There has being an error join the IRC Channels that you have provided,  and we cannot proceed."
                 print "For your convinence the bot has being cleanly shutdown"
@@ -219,14 +223,14 @@ while (1):
         if ircbpconfig.DANCERMODE:
             if msg[1] == '379':
                 print "We are being forwarded"
-                remchan(msg[3])
+                ircbpcommon.remchan(msg[3])
                 ircbpconfig.addchan(msg[4])
             #join blocking modes
             if msg[1] == '437' or msg[1] == '480' or msg[1] == '515':
                 #We can't join channels that are invite only
                 print "The channel the bot just tried to join is invite only..."
                 print "Removing from list"
-                remchan(msg[3])
+                ircbpcommon.remchan(msg[3])
                 if len(ircbpconfig.CHANNELS) == 0:
                     print "There has being an error join the IRC Channels that you have provided,  and we cannot proceed."
                     print "For your convinence the bot has being cleanly shutdown"

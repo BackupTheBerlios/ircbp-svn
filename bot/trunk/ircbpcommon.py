@@ -24,7 +24,11 @@
 # GPL Document can also be found in the same directory as this file as "LICENSE"			#
 #########################################################################################################
 
-import socket, string, sys, time, fnmatch
+import socket
+import string
+import sys
+import time
+import fnmatch
 import ircbpconfig
 
 # This basic socket will provide 1 connection to an IRC Server, in future we can most likely make it into an array
@@ -54,8 +58,8 @@ def dojoins():
     x = 0
     print "Starting the loop"
     while (len(ircbpconfig.channels)-1 >= x):
-        print "The loop is going to join the channel in ircbpconfig.channels[" + str(x) + "] which is " + ircbpconfig.channels[x]
-        irccommand("JOIN " + ircbpconfig.channels[x])
+        print "The loop is going to join the channel in ircbpconfig.channels[" + str(x) + "][0] which is " + ircbpconfig.channels[x][0]
+        irccommand("JOIN " + ircbpconfig.channels[0][0])
         x = x+1
     print "dojoins Complete!"
 
@@ -64,22 +68,35 @@ def sendnickserv():
     if ircbpconfig.NSPASSWORD != "": 
         irccommand("PRIVMSG NICKSERV :IDENTIFY " + ircbpconfig.NSPASSWORD)
         time.sleep(10)
+
+def addchan(CHANNEL):
+    ircbpconfig.channels.append(CHANNEL)
         
 # This function will check if a user is in the privledged[x] array
 
-def privcheck(USERHOSTTBC):
+def privcheck(USERHOSTTBC, LEVEL):
     print "User PrivCheck Called"
     x = 0
     print "starting the loop"
     while (len(ircbpconfig.privledged)-1 >= x):
         print "The data we got is: " + USERHOSTTBC
-        print "The loop is checking ircbpconfig.privledged[" + str(x) + "] which is " + ircbpconfig.privledged[x]
-        if fnmatch.fnmatch(USERHOSTTBC,ircbpconfig.privledged[x]):
-            print "OMG MATCH!"
-            return 1
+        print "The loop is checking ircbpconfig.privledged[" + str(x) + "][0] which is " + ircbpconfig.privledged[x][0]
+        if fnmatch.fnmatch(USERHOSTTBC,ircbpconfig.privledged[x][0]):
+            print "We have a match on the host, now to check access"
+            print ircbpconfig.privledged[x][1]
+            if LEVEL == "A" and ircbpconfig.privledged[x][1] == "A":
+                    return 1
+            elif LEVEL == "O" and ircbpconfig.privledged[x][1] in "AO":
+                    return 1
+            elif LEVEL == "U" and ircbpconfig.privledged[x][1] in "AOU":
+                    return 1
+            else:
+                return 0
+                print "Auth Level does not match"
         else:
             x = x+1
             print "NOT A MATCH!"
+            continue
     return 0
     print "No Matches"
 
@@ -90,8 +107,8 @@ def ischanmember(CHKCHANNEL):
     x = 0
     print "Starting the loop"
     while (len(ircbpconfig.channels)-1 >= x):
-        print "The loop is checking if we are in ircbpconfig.channels[" + str(x) + "] which is " + ircbpconfig.channels[x]
-        if string.upper(ircbpconfig.channels[x]) == string.upper(CHKCHANNEL):
+        print "The loop is checking if we are in ircbpconfig.channels[" + str(x) + "][0] which is " + ircbpconfig.channels[x][0]
+        if string.upper(ircbpconfig.channels[x][0]) == string.upper(CHKCHANNEL):
             print "We are in it!"
             return 1
         else:
@@ -106,8 +123,8 @@ def remchan(CHANNEL):
     x = 0
     print "Starting the loop"
     while (len(ircbpconfig.channels)-1 >= x):
-        print "The loop is checking if the channel is a match @ ircbpconfig.channels[" + str(x) + "] which is " + ircbpconfig.channels[x]
-        if string.upper(ircbpconfig.channels[x]) == string.upper(CHANNEL):
+        print "The loop is checking if the channel is a match @ ircbpconfig.channels[" + str(x) + "][0] which is " + ircbpconfig.channels[x][0]
+        if string.upper(ircbpconfig.channels[x][0]) == string.upper(CHANNEL):
             print "We are in it!"
             del ircbpconfig.channels[x]
             return 1

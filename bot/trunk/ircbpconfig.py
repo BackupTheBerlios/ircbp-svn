@@ -34,7 +34,7 @@ class mysqlconfig:
     # EDIT THE FOLLOWING LINE TO THE NAME OF YOUR SQL HOST
     SQLHOST = 'localhost'
     # EDIT THE FOLLOWING LINE TO THE NAME OF YOUR SQL USER
-    SQLUSER = 'IRCBP'
+    SQLUSER = 'IRCBPBOT'
     # EDIT THE FOLLOWING LINE TO THE PASSWORD OF YOUR SQL USER
     SQLPASS = ''
     # EDIT THE FOLLOWING LINE TO THE PORT USED BY YOUR SQL SERVER
@@ -49,7 +49,7 @@ sqlconfig = mysqlconfig()
 
 # Connecting...
 
-db=MySQLdb.connect(host=sqlconfig.SQLHOST, user=sqlconfig.SQLUSER, passwd=sqlconfig.SQLPASS, db='IRCBP', port=sqlconfig.SQLPORT)
+db=MySQLdb.connect(host=sqlconfig.SQLHOST, user=sqlconfig.SQLUSER, passwd=sqlconfig.SQLPASS, db='IRCBPBOT', port=sqlconfig.SQLPORT)
 
 # Main configuration!
 
@@ -69,8 +69,7 @@ if db.errno() != 0:
     print db.errno() + " " + db.error()
     print "Location of error:  Channels Query"
     
-prechannels=db.store_result()
-channels=[c[0] for c in prechannels.fetch_row(prechannels.num_rows())]
+channels=list(db.use_result().fetch_row(500))
 
 # Now from privledged users!
 
@@ -80,9 +79,7 @@ if db.errno() != 0:
     print db.errno() + " " + db.error()
     print "Location of error:  Users Query"
     
-preprivs=db.store_result()
-privledged=[c[0] for c in preprivs.fetch_row(prechannels.num_rows())]
-
+privledged=list(db.store_result().fetch_row(500))
 
 # Bot Nickname and Realname (Must not be null) for the IRC Bot to use
     
@@ -108,5 +105,3 @@ SVRPASSWORD = configprops[0][5]
 # 1 if using a IRCd that you are connecting to is DancerIRCd (Freenode for example)
 # 0 if not
 DANCERMODE = int(configprops[0][6])
-
-
