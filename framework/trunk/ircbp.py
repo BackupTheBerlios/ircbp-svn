@@ -1,42 +1,47 @@
 #!/usr/bin/python
 
 #########################################################################################################
-# (C) 2004 Nigel Jones, Brian Pankey and contributors to The IRC Bot Project, All Rights Reserved.	#
-# Some Portions are copyright to Gian Mario Tagliaretti, portions of his code will be replaced shortly	#
+# (C) 2004 Nigel Jones, Brian Pankey and contributors to The IRC Bot Project, All Rights Reserved.      #
+# Some Portions are copyright to Gian Mario Tagliaretti, portions of his code will be replaced shortly  #
 #########################################################################################################
 
 # $Id$ #
 
 #################################################
-# The main developers are:			#
-#	Nigel Jones <nigelj@users.berlios.de>	#
-#	Brian Pankey <pankey@users.berlios.de>	#
-#						#
+# The main developers are:                      #
+#   Nigel Jones <nigelj@users.berlios.de>       #
+#   Brian Pankey <pankey@users.berlios.de>      #
+#                                               #
 # Contributors names can be found in "CREDITS"	#
-#						#
-# Project Page is at:				#
-# https://developer.berlios.de/projects/ircbp/	#
+#                                               #
+# Project Page is at:                           #
+# https://developer.berlios.de/projects/ircbp/  #
 #################################################
 
 #########################################################################################################
 # This is currently held under the terms of the General Public License Version 2 which can be found at:	#
-# http://www.gnu.org/licenses/gpl.txt									#
-# GPL Document can also be found in the same directory as this file as "LICENSE"			#
+# http://www.gnu.org/licenses/gpl.txt                                                                   #
+# GPL Document can also be found in the same directory as this file as "LICENSE"                        #
 #########################################################################################################
 
 # Edit ircbpconfig.py for configuration
 
 # Imports for sockets etc
 
-import socket, string, sys, time, fnmatch, ircbpconfig
+import fnmatch
+import socket
+import string
+import sys
+import time
+import ircbpconfig
     
 #################################################################################
-# CODE STARTS HERE								#
-# It is strongly recommended that you do not touch anything below this point!	#
+# CODE STARTS HERE                                                              #
+# It is strongly recommended that you do not touch anything below this point!   #
 #################################################################################
 #print ircbpconfig.SERVER
-# This basic socket will provide 1 connection to an IRC Server, in future we can most likely man it into an array
-# of sockets
+# This basic socket will provide 1 connection to an IRC Server, in future we can most likely
+# make it into an array of sockets
 IRC = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #open a connection with the server
 def srvconnect():

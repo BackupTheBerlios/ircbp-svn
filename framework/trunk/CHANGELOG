@@ -73,3 +73,4 @@ NJ - 07/12/04 - 433 numeric now handled - means that it append a _ to ircbpconfi
 NJ - 07/12/04 - 376 numeric now handled - When the server gets the 376 (END OF MOTD) numeric it will THEN send Nickserv Identification and Join requested channels.
 NJ - 07/12/04 - Implemented db-based channels and users to the bot.
 NJ - 07/12/04 - Fixed comments in ircbpconfig.py (to make it clearer in the fact you only need to edit the SQL settings now).
+BP - 07/12/04 - Fixed some spacing and such. Mostly code browsing since i need (and dont have) _mysql for the bot to work  =P
