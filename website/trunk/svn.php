@@ -53,6 +53,12 @@ include("includes/header.php");
 		"svn update" or "svn up"
     </p>
   </div>
+  <div class="story">
+    <h3>Web Browser Access</h3>
+    <p>
+    	The IRCbp SVN Sources can be accessed via your web browser by going to: http://svn.berlios.de/viewcvs/ircbp
+    </p>
+  </div>
 </div> 
 <!--end content --> 
 <?php
