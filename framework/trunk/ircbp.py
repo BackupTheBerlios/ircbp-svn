@@ -24,14 +24,14 @@
 
 # Imports for sockets etc
 
-import socket, string, sys, time
+import socket, string, sys, time, fnmatch
 
 # Introduce Privledged User System
 
 privledged = []
 
-def adduser(nick_name):
-    privledged.append(nick_name)
+def addmask(HOSTMASK):
+    privledged.append(HOSTMASK)
 
 # Introduce Channel System
 
@@ -43,15 +43,20 @@ def addchan(CHANNEL):
 # Introduce Users allowed to control "powerful" features
 # Features include !quit, !topic, !kick, !cycle
 
-adduser('Nigel')
-adduser('Jorge-Kersh')
-adduser('ghetrino')
-adduser('pankey')
+#adduser('Nigel')
+#adduser('Jorge-Kersh')
+#adduser('ghetrino')
+#adduser('pankey')
+
+
+# Useage:
+# addmask('nick!ident@host')
+addmask('*!*@nigel.user')
+addmask('*!*@ghettobp19.user')
 
 # Add Channels
 
 addchan('#IRCBP')
-addchan('#distro-project')
 
 # Connection Details
 # In future this should be in a seperate file!
@@ -118,13 +123,15 @@ def irclogin(nickname, username='pbot', password = SVRPASSWORD, realname='Nigels
 
 # This function will check if a user is in the privledged[x] array
 
-def privcheck(USERTBC):
+def privcheck(USERHOSTTBC):
     print "User PrivCheck Called"
     x = 0
     print "starting the loop"
     while (len(privledged)-1 >= x):
+	print "The data we got is: " + USERHOSTTBC
 	print "The loop is checking privledged[" + str(x) + "] which is " + privledged[x]
-	if privledged[x] == USERTBC:
+	if fnmatch.fnmatch(USERHOSTTBC,privledged[x]):
+	#if fnmatch.fnmatch('Nigel!~nigel@nigel.user','*!*@nigel.user'):
 	    print "OMG MATCH!"
 	    return 1
 	else:
@@ -173,16 +180,19 @@ while (1):
 	print "The message was: " + message
     #if msg[1] == 'PRIVMSG' and ischanmember(msg[2]):
     if msg[1] == 'PRIVMSG' and msg[2][0] == "#":
+	# Doing this for HOSTMASK auth method which is now in use
+	HOSTMASK = string.lstrip(msg[0], ':')
+	# Some functions still need nick_name so lets keep it!
+	nick_name = string.lstrip(msg[0][:string.find(msg[0],"!")], ':')
 	CHANNEL = msg[2]
 	if len(msg) > 3:
 	    print "We have a channel message! - W00T!!!"
-	    nick_name = string.lstrip(msg[0][:string.find(msg[0],"!")], ':')
 	    if string.lstrip(msg[3], ':') == '!say':
 		print "We need to say something :P"
 		message = ' '.join(msg[4:])
 		irccommand("PRIVMSG " + CHANNEL + " :" + message)
 	    if string.lstrip(msg[3], ':') == '!topic':
-		if privcheck(nick_name):
+		if privcheck(HOSTMASK):
 		    if len(msg) > 4:
 			print "Changing Topic"
 			message = ' '.join(msg[4:])
@@ -197,7 +207,7 @@ while (1):
 	    # msg[4] = channel
 	    # msg[5] = nickname
 	    # msg[6->] = reason
-		if privcheck(nick_name) == 1:
+		if privcheck(HOSTMASK) == 1:
 		    print "Someone's being bad, I need to kick!"
 		    #if msg[4] != '':
 		    if len(msg) > 4:
@@ -224,7 +234,7 @@ while (1):
 	    if string.lstrip(msg[3], ':') == '!join':
 		print "Joining a channel!"
 		# Need to make sure that nick_name has in our privledged array
-		if privcheck(nick_name):
+		if privcheck(HOSTMASK):
 		    # He/She is, making sure that they provided a channel - We will need a string check on this too.
 		    if len(msg) > 4:
 			# Something has being provided, need to make sure it is a channel for now by only checking if it has # at the start
@@ -241,7 +251,7 @@ while (1):
 		else:
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 	    if string.lstrip(msg[3], ':') == '!cycle':
-		if privcheck(nick_name):
+		if privcheck(HOSTMASK):
 		    print "Cycling!"
 		    irccommand("PRIVMSG " + CHANNEL + " :Okie Doke!")
 		    irccommand("PART " + CHANNEL)
@@ -251,7 +261,7 @@ while (1):
 		    # Oh dear they cycle our bot!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 	    if string.lstrip(msg[3], ':') == '!quit':
-		if privcheck(nick_name):
+		if privcheck(HOSTMASK):
 		    print "It's a quit"
 		    irccommand("QUIT :Quit from " + nick_name)
 		    print "Sent quit message, exiting"
