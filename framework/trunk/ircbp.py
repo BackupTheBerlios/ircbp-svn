@@ -207,6 +207,25 @@ while (1):
 		else:
 		    # They don't have privledges!
 		    irccommand("PRIVMSG " + CHANNEL + " :NO PRIVLEDGES TO KICK!")
+	    if string.lstrip(msg[3], ':') == '!join':
+		print "Joining a channel!"
+		# Need to make sure that nick_name has in our privledged array
+		if privcheck(nick_name):
+		    # He/She is, making sure that they provided a channel - We will need a string check on this too.
+		    if len(msg) > 4:
+			# Something has being provided, need to make sure it is a channel for now by only checking if it has # at the start
+			if msg[4][0] == "#":
+			    # All ok, adding the channel to the array, JOIN sent normally because we have gone past the time of dojoin
+			    addchan(msg[4])
+			    irccommand("JOIN " + msg[4])
+			else:
+			    # Not a channel, return error
+			    irccommand("PRIVMSG " + CHANNEL + " :" + msg[4] + " is not a channel")
+		    else:
+			# Nothing provided, syntax error!
+			irccommand("PRIVMSG " + CHANNEL + " :Syntax error, correct syntax is: !join <channel>")
+		else:
+		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 	    if string.lstrip(msg[3], ':') == '!cycle':
 		print "Cycling!"
 		irccommand("PRIVMSG " + CHANNEL + " :Okie Doke!")
