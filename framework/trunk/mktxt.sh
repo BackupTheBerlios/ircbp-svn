@@ -1,16 +1,17 @@
 #!/bin/bash
 
 echo -n "Copying CHANGELOG to CHANGELOG.txt..."
-rm CHANGELOG.txt
 cp CHANGELOG CHANGELOG.txt
-echo "Done!\n"
+echo "Done!"
 
 echo -n "Copying CREDITS to CREDITS.txt..."
-rm CREDITS.txt
 cp CREDITS CREDITS.txt
-echo "Done!\n"
+echo "Done!"
 
 echo -n "Copying LICENSE to LICENSE.txt..."
-rm LICENSE.txt
 cp LICENSE LICENSE.txt
-echo "Done!\n"
+echo "Done!"
+
+echo -n "Copying README to README.txt..."
+cp LICENSE LICENSE.txt
+echo "Done!"

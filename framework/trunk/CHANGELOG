@@ -52,3 +52,5 @@ NJ - 14/11/04 - Added the DancerIRCd 'join-blocking' numerics
 NJ - 14/11/04 - Fixed some of the tabbing
 NJ - 14/11/04 - Fix a TINY bug... (I added a '.' after a function and python didn't like it.
 NJ - 14/11/04 - Made the bot rejoin when kicked.
+NJ - 14/11/04 - Updated mktxt.sh (so it will make README.txt
+NJ - 14/11/04 - Got rid of the .txt files as we can just mktxt them for releases (e.g. Windows users that are able to download source from SVN should be able to read these files via open with)
