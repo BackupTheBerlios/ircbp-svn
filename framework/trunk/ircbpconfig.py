@@ -42,9 +42,8 @@ sqlconfig = mysqlconfig()
 
 db=_mysql.connect(host=sqlconfig.SQLHOST, user=sqlconfig.SQLUSER, passwd=sqlconfig.SQLPASS, db='IRCBP', port=sqlconfig.SQLPORT)
 
-db.query("""SELECT * from config""")
-config=db.use_result()
-configr=config.fetch_row()
+db.query("""SELECT * from config LIMIT 0 , 1""")
+configprops=db.use_result().fetch_row()
 
 
 # Add functions for Users/Channels and Prefixes
@@ -64,28 +63,29 @@ addmask('*!*@*')
 # Channels that the bot will join by default
  
 addchan('#IRCBP')
+addchan('#newzealand')
 
 # Bot Nickname and Realname (Must not be null) for the IRC Bot to use
     
-NICKNAME = configr[0][0]
-REALNAME = configr[0][1]
+NICKNAME = configprops[0][0]
+REALNAME = configprops[0][1]
     
 # Add your bots nickserv password here, if none leave blank!
 
-NSPASSWORD = ''
+NSPASSWORD = configprops[0][2]
 
 # Server Connection Details
 # In future this should be in a seperate file!
     
 # IRC Server DNS Name OR IP
-SERVER = configr[0][2]
+SERVER = configprops[0][3]
     
 # Port IRC Server Listerns on
-PORT = int(configr[0][3])
+PORT = int(configprops[0][4])
 
 # Password for logining into the server (normally blank unless you have a special I:line)
-SVRPASSWORD = configr[0][4]
+SVRPASSWORD = configprops[0][5]
 
 # 1 if using a IRCd that you are connecting to is DancerIRCd (Freenode for example)
 # 0 if not
-DANCERMODE = int(configr[0][5])
+DANCERMODE = int(configprops[0][6])

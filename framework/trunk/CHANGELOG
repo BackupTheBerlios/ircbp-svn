@@ -65,3 +65,7 @@ NJ - 16/11/04 - After advise all the tabs have being removed
 NJ - 05/12/04 - Updating the newline handling in the buffer thanks to bdash in #newzealand on freenode ;)
 NJ - 05/12/04 - Finished updating the newline handling (it works perfectly) once again, THANK YOU BDASH!
 NJ - 05/12/04 - Fix up !kick syntax error.
+NJ - 06/12/04 - Added NSPASSWORD to SQL
+NJ - 06/12/04 - Made a small optimization in ircbpconfig.py to incorporate the DB handling to end result into 1 line (instead of two) and only two varibles, looking for more to be made currently.
+NJ - 06/12/04 - Remade create_config.sql (this time from phpMyAdmin).  Now also drops existing table (if any) so PLEASE watch out!
+NJ - 06/12/04 - Limited SQL query to one result which should prevent problems.
