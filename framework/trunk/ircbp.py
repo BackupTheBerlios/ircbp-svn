@@ -67,6 +67,10 @@ addchan('#IRCBP')
 NICKNAME = 'IRCBP'
 REALNAME = 'The Internet Chat Relay Bot Project'
 
+# Add your bots nickserv password here, if none leave blank!
+
+NSPASSWORD = ''
+
 # Server Connection Details
 # In future this should be in a seperate file!
 
@@ -112,16 +116,21 @@ def dojoins():
     print "dojoins Complete!"
 
 
+def sendnickserv():
+    if NSPASSWORD != "": 
+	irccommand("PRIVMSG NICKSERV :IDENTIFY " + NSPASSWORD)
+	time.sleep(10)
+
 #send login data (customizable)
-def irclogin(nickname, username=NICKNAME, password = SVRPASSWORD, realname=REALNAME, hostname=NICKNAME, servername=SERVER):
+def irclogin():
     #We need to see if we need to send a password, so here we go
-    if password != "":
+    if SVRPASSWORD != "":
 	#Pass Required so lets send it!
-	irccommand("PASS " + password)
+	irccommand("PASS " + SVRPASSWORD)
 
     #IRC "USER" RFC says: "USER Username Hostname Servername :Realname"
-    irccommand("USER %s %s %s :%s" % (username, hostname, servername, realname))
-    irccommand("NICK " + nickname)
+    irccommand("USER %s %s %s :%s" % (NICKNAME, NICKNAME, SERVER, REALNAME))
+    irccommand("NICK " + NICKNAME)
 
 
 # This function will check if a user is in the privledged[x] array
@@ -177,8 +186,8 @@ def ischanmember(CHKCHANNEL):
 #    print "No matches"
 
 srvconnect()
-irclogin(NICKNAME)
-#ircjoin(CHANNEL)
+irclogin()
+sendnickserv()
 dojoins()
 
 while (1):
