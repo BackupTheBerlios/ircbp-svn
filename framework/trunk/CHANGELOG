@@ -154,8 +154,10 @@ NJ - 07/12/04 - 376 numeric now handled - When the server gets the 376 (END OF M
 NJ - 07/12/04 - Implemented db-based channels and users to the bot.
 NJ - 07/12/04 - Fixed comments in ircbpconfig.py (to make it clearer in the fact you only need to edit the SQL settings now).
 BP - 07/12/04 - Fixed some spacing and such. Mostly code browsing since i need (and dont have) _mysql for the bot to work  =P
-NJ - 06/01/04 - Modulized common functions into ircbpcommon.py
-NJ - 06/01/04 - Added error handing to mysql (rough for now)
-NJ - 06/01/04 - Moved socket stuff so not much is left in ircbp.py
-NJ - 06/01/04 - Fixed missing comment in ircbpcommon.py
-NJ - 06/01/04 - Fixed problem CHANGELOG (3rd time lucky hopefully)
+NJ - 06/01/05 - Modulized common functions into ircbpcommon.py
+NJ - 06/01/05 - Added error handing to mysql (rough for now)
+NJ - 06/01/05 - Moved socket stuff so not much is left in ircbp.py
+NJ - 06/01/05 - Fixed missing comment in ircbpcommon.py
+NJ - 06/01/05 - Fixed problem CHANGELOG (3rd time lucky hopefully)
+NJ - 06/01/05 - Changed _mysql to MySQLdb (http://sourceforge.net/projects/mysql-python/)
+NJ - 06/01/05 - Spotted new mistake with my changelog entries, it's 05 now not 04 ;)

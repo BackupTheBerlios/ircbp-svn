@@ -26,7 +26,7 @@
 
 # Don't edit the following "import" line!
 
-import _mysql
+import MySQLdb
 
 
 
@@ -49,7 +49,7 @@ sqlconfig = mysqlconfig()
 
 # Connecting...
 
-db=_mysql.connect(host=sqlconfig.SQLHOST, user=sqlconfig.SQLUSER, passwd=sqlconfig.SQLPASS, db='IRCBP', port=sqlconfig.SQLPORT)
+db=MySQLdb.connect(host=sqlconfig.SQLHOST, user=sqlconfig.SQLUSER, passwd=sqlconfig.SQLPASS, db='IRCBP', port=sqlconfig.SQLPORT)
 
 # Main configuration!
 
