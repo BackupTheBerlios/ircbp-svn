@@ -1,0 +1,18 @@
+(C) 2004 Nigel Jones, Brian Pankey and contributors to The IRC Bot Project, All Rights Reserved.
+
+The main developers are:
+	Nigel Jones <nigelj@users.berlios.de>
+	Brian Pankey <pankey@users.berlios.de>
+	Kyle Brooks <kyleb@users.berlios.de>
+
+Contributors names can be found in "CREDITS"
+
+Project Page is at:
+https://developer.berlios.de/projects/ircbp/
+
+
+This is going to be revamped sometime soon.
+
+Before running IRCBP PLEASE EDIT ircbp.py after line 49
+
+Please check the configuration options against what you want and CHANGE addmask('*!*@*') to something OTHER than that!

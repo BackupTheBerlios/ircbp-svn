@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #########################################################################################################
-# (C) Nigel Jones, Brian Pankey and contributors to The IRC Bot Project, All Rights Reserved, 2004	#
+# (C) 2004 Nigel Jones, Brian Pankey and contributors to The IRC Bot Project, All Rights Reserved.	#
 # Some Portions are copyright to Gian Mario Tagliaretti, portions of his code will be replaced shortly	#
 #########################################################################################################
 
@@ -11,6 +11,7 @@
 # The main developers are:			#
 #	Nigel Jones <nigelj@users.berlios.de>	#
 #	Brian Pankey <pankey@users.berlios.de>	#
+#	Kyle Brooks <kyleb@users.berlios.de>	#
 #						#
 # Contributors names can be found in "CREDITS"	#
 #						#
@@ -61,10 +62,10 @@ addmask('*!*@*')
 
 addchan('#IRCBP')
 
-# Bot Nickname and Realname for the IRC Bot to use
+# Bot Nickname and Realname (Must not be null) for the IRC Bot to use
 
 NICKNAME = 'IRCBP'
-REALNAME = ''
+REALNAME = 'The Internet Chat Relay Bot Project'
 
 # Server Connection Details
 # In future this should be in a seperate file!

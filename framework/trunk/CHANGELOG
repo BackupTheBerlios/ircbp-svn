@@ -30,3 +30,5 @@ NJ - 09/10/04 - Made the configuration stuff bit better to look at!
 NJ - 09/10/04 - Made some code more "tidy"
 NJ - 09/10/04 - RELEASE - 0.1.0
 NJ - 09/10/04 - Tag to /framework/tags/REL-0.1.0
+NJ - 09/10/04 - Added a temporary README
+NJ - 09/10/04 - Made REALNAME set by default to fix bug #2613 (Invalid IRC Parameters)
