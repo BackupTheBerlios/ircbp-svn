@@ -194,20 +194,28 @@ while (1):
 		    # They don't have privledges!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 	    if string.lstrip(msg[3], ':') == '!kick':
+	    # msg[4] = channel
+	    # msg[5] = nickname
+	    # msg[6->] = reason
 		if privcheck(nick_name) == 1:
 		    print "Someone's being bad, I need to kick!"
 		    #if msg[4] != '':
 		    if len(msg) > 4:
-			irccommand("PRIVMSG " + CHANNEL + " :Oh someones being bad! LETS KICK!")
+			if ischanmember(msg[4]):
+			    irccommand("PRIVMSG " + CHANNEL + " :Oh someones being bad! LETS KICK!")
+			    if len(msg) > 5:
+				#if msg[5] != '':
+				if len(msg) > 6:
+				    message = ' '.join(msg[6:])
+				    irccommand("KICK " + msg[4] + " " + msg[5] + " :" + message)
+				else:
+				    irccommand("KICK " + msg[4] + " " + msg[5] + " :You've being a BAD boy!")
 
-			#if msg[5] != '':
-			if len(msg) > 5:
-			    message = ' '.join(msg[5:])
-			    irccommand("KICK " + CHANNEL + " " + msg[4] + " :" + message)
+			        irccommand("PRIVMSG " + CHANNEL + " :" + nick_name + ", your dirty work is done!")
+			    else:
+			        irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick \x02<nick>\x02 [Optional Message]")
 			else:
-			    irccommand("KICK " + CHANNEL + " " + msg[4] + " :You've being a BAD boy!")
-
-			irccommand("PRIVMSG " + CHANNEL + " :" + nick_name + ", your dirty work is done!")
+			    irccommand("PRIVMSG " + CHANNEL + " :" + nick_name + ", I'm not in that channel!")
 		    else:
 			irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick \x02<nick>\x02 [Optional Message]")
 		else:

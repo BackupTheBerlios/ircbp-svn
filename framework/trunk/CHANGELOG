@@ -13,3 +13,4 @@ NJ - 01/10/04 - Channel System is done, needs lots of testing.  I think i'll lea
 NJ - 01/10/04 - Added !join, no !part yet.
 NJ - 01/10/04 - Added privcheck call to: !topic, !quit and !cycle
 NJ - 01/10/04 - Made syntax errors have a bit of bold.
+NJ - 01/10/04 - Made !kick run as a multichannel system, e.g. !kick <channel> <nick> [messsage]
