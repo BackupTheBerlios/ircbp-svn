@@ -29,9 +29,6 @@
 # Imports for sockets etc
 
 import socket, string, sys, time, fnmatch, ircbpconfig
-
-print ircbpconfig.PORT
-print ircbpconfig.SERVER
     
 #################################################################################
 # CODE STARTS HERE								#
@@ -164,7 +161,7 @@ while (1):
 
     if msg[0] == "PING": #check if server have sent ping command
 	irccommand("PONG %s" % msg[1]) #answer with pong as per RFC 1459
-    if msg[1] == 'PRIVMSG' and msg[2] == NICKNAME:
+    if msg[1] == 'PRIVMSG' and msg[2] == ircbpconfig.NICKNAME:
 	print "We got a PM!!!"
 	nick_name = msg[0][:string.find(msg[0],"!")] #if a private message is sent to you catch it
 	print "Sent by " + nick_name

@@ -41,3 +41,5 @@ NJ - 13/11/04 - Added ircbpconfig.py
 NJ - 13/11/04 - All the "lists" (I call them arrays) are now held in the new module.
 NJ - 13/11/04 - README fixed up.
 NJ - 13/11/04 - Added svn:ignore *.pyc because we don't need to import compiled python modules into the repo)
+NJ - 13/11/04 - Found a problem with all the commands, it was checking for NICKNAME instead of ircbpconfig.NICKNAME
+NJ - 13/11/04 - Cleaned up some debug stuff I added when I was having trouble with the module.
