@@ -45,6 +45,8 @@ def addchan(CHANNEL):
 
 adduser('Nigel')
 adduser('Jorge-Kersh')
+adduser('ghetrino')
+adduser('pankey')
 
 # Add Channels
 
