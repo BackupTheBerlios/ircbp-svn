@@ -68,8 +68,8 @@ def ircjoin(channel):
 def irclogin(nickname, username='pbot', password = SVRPASSWORD, realname='Nigels PBot', hostname='Nigel', servername='Freenode'):
     #We need to see if we need to send a password, so here we go
     if password != "":
-    	#Pass Required so lets send it!
-    	irccommand("PASS " + password)
+	#Pass Required so lets send it!
+	irccommand("PASS " + password)
 
     #IRC "USER" RFC says: "USER Username Hostname Servername :Realname"
     irccommand("USER %s %s %s %s" % (username, hostname, servername, realname))
@@ -86,19 +86,15 @@ while (1):
     print buffer
 
     if msg[0] == "PING": #check if server have sent ping command
-        irccommand("PONG %s" % msg[1]) #answer with pong as per RFC 1459
+	irccommand("PONG %s" % msg[1]) #answer with pong as per RFC 1459
     if msg[1] == 'PRIVMSG' and msg[2] == NICKNAME:
-    	print "We got a PM!!!"
-        filetxt = open('/tmp/msg.txt', 'a+') #open an arbitrary file to store the messages
-        nick_name = msg[0][:string.find(msg[0],"!")] #if a private message is sent to you catch it
+	print "We got a PM!!!"
+	nick_name = msg[0][:string.find(msg[0],"!")] #if a private message is sent to you catch it
 	print "Sent by " + nick_name
-        message = ' '.join(msg[3:])
+	message = ' '.join(msg[3:])
 	print "The message was: " + message
-        filetxt.write(string.lstrip(nick_name, ':') + ' -> ' + string.lstrip(message, ':') + '\n') #write to the file
-	print "This should be in /tmp/msg.txt: " +  string.lstrip(nick_name, ':') + ' -> ' + string.lstrip(message, ':') + '\n'
-        filetxt.flush() #don't wait for next message, write it now!
     if msg[1] == 'PRIVMSG' and msg[2] == CHANNEL:
-    	print "We have a channel message! - W00T!!!"
+	print "We have a channel message! - W00T!!!"
 	nick_name = string.lstrip(msg[0][:string.find(msg[0],"!")], ':')
 	if string.lstrip(msg[3], ':') == '!say':
 	    print "We need to say something :P"
@@ -111,7 +107,7 @@ while (1):
 	    irccommand("TOPIC " + CHANNEL + " :" + message)
 	if string.lstrip(msg[3], ':') == '!kick':
 	    print "Someone's being bad, I need to kick!"
-#	    if msg[4] != '':
+	    #if msg[4] != '':
 	    if len(msg) > 4:
 		irccommand("PRIVMSG " + CHANNEL + " :Oh someones being bad! LETS KICK!")
 
@@ -124,19 +120,17 @@ while (1):
 
 		irccommand("PRIVMSG " + CHANNEL + " :" + nick_name + ", your dirty work is done!")
 	    else:
-	    	irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick <nick> [Optional Message]")
+		irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick <nick> [Optional Message]")
 	if string.lstrip(msg[3], ':') == '!cycle':
 	    print "Cycling!"
 	    irccommand("PRIVMSG " + CHANNEL + " :Okie Doke!")
 	    irccommand("PART " + CHANNEL)
 	    irccommand("JOIN " + CHANNEL)
 	    irccommand("PRIVMSG " + CHANNEL + " :Did you miss me?")
-    	if string.lstrip(msg[3], ':') == '!quit':
+	    if string.lstrip(msg[3], ':') == '!quit':
 	    print "It's a quit"
 	    irccommand("QUIT :Quit from " + nick_name)
 	    print "Sent quit message, exiting"
-	    #irccommand(":QUIT Testing 123")
-	    #time.sleep(2.5)
 	    sys.exit()
     if msg[2] == 'KICK':
     	print "Oh yay it worked!"
