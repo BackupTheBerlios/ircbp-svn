@@ -290,6 +290,22 @@ while (1):
 		    # Oh dear they cycle our bot!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 
+            # Part Command
+
+	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!part'):
+                partmessage = ' '.join(msg[4:])
+		if privcheck(HOSTMASK):
+		    print "Parting!"
+		    irccommand("PRIVMSG " + CHANNEL + " :buh-bye now! =)")
+		    irccommand("PART " + CHANNEL + " :Part from %s" % nick_name)
+		elif privcheck(HOSTMASK):
+                    print "Parting!"
+                    irccommand("PRIVMSG " + CHANNEL + " :buh-bye now! =)")
+		    irccommand("PART " + CHANNEL + " %s" % partmessage)
+		else:
+		    # Oh dear they tried to part our bot!
+		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
+
 	    # Quit Command
 
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!quit'):

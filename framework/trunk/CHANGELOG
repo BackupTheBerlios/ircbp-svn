@@ -24,3 +24,4 @@ NJ - 02/10/04 - Fixed bug #2556 (Comparing strings may fail because of case)
 NJ - 03/10/04 - Added more comments so that it's more spaced out where the !say commands are etc
 NJ - 03/10/04 - Started to implement the ability to have multiple prefixes, sadly i realised that my way of checking will cause problems.  The call for it has being commented out and put back to the original but it is something we should look at making better in the future.
 BP - 03/10/04 - Added a bash script to copy unix files to windows .txt format =)
+BP - 03/10/04 - Added !part command...realized this ChangeLog is backwards...should be top with newest changes
