@@ -13,5 +13,5 @@ cp LICENSE LICENSE.txt
 echo "Done!"
 
 echo -n "Copying README to README.txt..."
-cp LICENSE LICENSE.txt
+cp README README.txt
 echo "Done!"
