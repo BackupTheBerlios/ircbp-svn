@@ -65,7 +65,7 @@ def sendnickserv():
         irccommand("PRIVMSG NICKSERV :IDENTIFY " + ircbpconfig.NSPASSWORD)
         time.sleep(10)
         
- This function will check if a user is in the privledged[x] array
+# This function will check if a user is in the privledged[x] array
 
 def privcheck(USERHOSTTBC):
     print "User PrivCheck Called"

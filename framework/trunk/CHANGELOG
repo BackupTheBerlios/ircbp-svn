@@ -1,4 +1,3 @@
-<<<<<<< .mine
 # Change Log - Format to be decided
 # Dates are in GMT and in DD/MM/YY format
 
@@ -155,4 +154,8 @@ NJ - 07/12/04 - 376 numeric now handled - When the server gets the 376 (END OF M
 NJ - 07/12/04 - Implemented db-based channels and users to the bot.
 NJ - 07/12/04 - Fixed comments in ircbpconfig.py (to make it clearer in the fact you only need to edit the SQL settings now).
 BP - 07/12/04 - Fixed some spacing and such. Mostly code browsing since i need (and dont have) _mysql for the bot to work  =P
->>>>>>> .r59
+NJ - 06/01/04 - Modulized common functions into ircbpcommon.py
+NJ - 06/01/04 - Added error handing to mysql (rough for now)
+NJ - 06/01/04 - Moved socket stuff so not much is left in ircbp.py
+NJ - 06/01/04 - Fixed missing comment in ircbpcommon.py
+NJ - 06/01/04 - Fixed problem CHANGELOG (3rd time lucky hopefully)
