@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 #########################################################################################################
 # (C) Nigel Jones, Brian Pankey and contributors to The IRC Bot Project, All Rights Reserved, 2004	#
 # Some Portions are copyright to Gian Mario Tagliaretti, portions of his code will be replaced shortly	#
