@@ -21,3 +21,5 @@ NJ - 02/10/04 - Importing Python module "fnmatch" - seems a nifty feature for wi
 NJ - 02/10/04 - Deleting masks_ircbp.py - the system has some flaws etc.
 NJ - 02/10/04 - Added new hostmask system, I KNOW ANOTHER ONE! - This one works a DREAM! - Uses fnmatch which I added to the imports, for a FS Matching checker it works SUPER well on plain text!
 NJ - 02/10/04 - Fixed bug #2556 (Comparing strings may fail because of case)
+NJ - 03/10/04 - Added more comments so that it's more spaced out where the !say commands are etc
+NJ - 03/10/04 - Started to implement the ability to have multiple prefixes, sadly i realised that my way of checking will cause problems.  The call for it has being commented out and put back to the original but it is something we should look at making better in the future.

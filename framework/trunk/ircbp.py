@@ -40,6 +40,11 @@ channels = []
 def addchan(CHANNEL):
     channels.append(CHANNEL)
 
+prefixes = []
+
+def addprefix(PREFIX):
+    prefixes.append(PREFIX)
+
 # Introduce Users allowed to control "powerful" features
 # Features include !quit, !topic, !kick, !cycle
 
@@ -51,6 +56,11 @@ addmask('*!*@ghettobp19.user')
 # Add Channels
 
 addchan('#IRCBP')
+
+# Add Prefixes
+
+addprefix('!')
+addprefix('IBP.')
 
 # Connection Details
 # In future this should be in a seperate file!
@@ -146,6 +156,21 @@ def ischanmember(CHKCHANNEL):
     return 0
     print "No matches"
 
+def isusingprefix(INDATA,COMMAND):
+    print "Checking if command has a set prefix in it"
+    x = 0
+    print "Starting the loop"
+    while (len(prefixes)-1 >= x):
+	print "The loop is checking if the prefix in " + INDATA + " is using the prefix in prefixes[" + str(x) + "] which is " + prefixes[x]
+	if string.upper(prefixes[x] + COMMAND) == string.upper(INDATA):
+	    print "We are in it!"
+	    return 1
+	else:
+	    #Keep going!
+	    x = x+1
+	    print "No match yet"
+    return 0
+    print "No matches"
 
 srvconnect()
 irclogin(NICKNAME)
@@ -175,10 +200,17 @@ while (1):
 	CHANNEL = msg[2]
 	if len(msg) > 3:
 	    print "We have a channel message! - W00T!!!"
+
+	    # Say Command
+
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!say'):
+	    #if isusingprefix(string.lstrip(msg[3], ':'), 'say'):
 		print "We need to say something :P"
 		message = ' '.join(msg[4:])
 		irccommand("PRIVMSG " + CHANNEL + " :" + message)
+
+	    # Topic Command
+
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!topic'):
 		if privcheck(HOSTMASK):
 		    if len(msg) > 4:
@@ -191,6 +223,9 @@ while (1):
 		else:
 		    # They don't have privledges!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
+
+	    # Kick Command
+
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!kick'):
 	    # msg[4] = channel
 	    # msg[5] = nickname
@@ -219,6 +254,9 @@ while (1):
 		else:
 		    # They don't have privledges!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
+
+	    # Join Command
+
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!join'):
 		print "Joining a channel!"
 		# Need to make sure that nick_name has in our privledged array
@@ -238,6 +276,9 @@ while (1):
 			irccommand("PRIVMSG " + CHANNEL + " :Syntax error, correct syntax is: !join \x02<channel>\x02")
 		else:
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
+
+	    # Cycle Command
+
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!cycle'):
 		if privcheck(HOSTMASK):
 		    print "Cycling!"
@@ -248,6 +289,9 @@ while (1):
 		else:
 		    # Oh dear they cycle our bot!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
+
+	    # Quit Command
+
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!quit'):
 		if privcheck(HOSTMASK):
 		    print "It's a quit"
