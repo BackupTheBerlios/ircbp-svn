@@ -207,7 +207,7 @@ while (1):
 
 			irccommand("PRIVMSG " + CHANNEL + " :" + nick_name + ", your dirty work is done!")
 		    else:
-			irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick <nick> [Optional Message]")
+			irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick \x02<nick>\x02 [Optional Message]")
 		else:
 		    # They don't have privledges!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
@@ -227,7 +227,7 @@ while (1):
 			    irccommand("PRIVMSG " + CHANNEL + " :" + msg[4] + " is not a channel")
 		    else:
 			# Nothing provided, syntax error!
-			irccommand("PRIVMSG " + CHANNEL + " :Syntax error, correct syntax is: !join <channel>")
+			irccommand("PRIVMSG " + CHANNEL + " :Syntax error, correct syntax is: !join \x02<channel>\x02")
 		else:
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 	    if string.lstrip(msg[3], ':') == '!cycle':
