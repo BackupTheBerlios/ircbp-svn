@@ -94,44 +94,50 @@ while (1):
 	message = ' '.join(msg[3:])
 	print "The message was: " + message
     if msg[1] == 'PRIVMSG' and msg[2] == CHANNEL:
-	print "We have a channel message! - W00T!!!"
-	nick_name = string.lstrip(msg[0][:string.find(msg[0],"!")], ':')
-	if string.lstrip(msg[3], ':') == '!say':
-	    print "We need to say something :P"
-	    message = ' '.join(msg[4:])
-	    irccommand("PRIVMSG " + CHANNEL + " :" + message)
-	if string.lstrip(msg[3], ':') == '!topic':
-	    print "Changing Topic"
-	    message = ' '.join(msg[4:])
-	    print "The new topic will be: " + message
-	    irccommand("TOPIC " + CHANNEL + " :" + message)
-	if string.lstrip(msg[3], ':') == '!kick':
-	    print "Someone's being bad, I need to kick!"
-	    #if msg[4] != '':
-	    if len(msg) > 4:
-		irccommand("PRIVMSG " + CHANNEL + " :Oh someones being bad! LETS KICK!")
-
-		#if msg[5] != '':
-		if len(msg) > 5:
-		    message = ' '.join(msg[5:])
-		    irccommand("KICK " + CHANNEL + " " + msg[4] + " :" + message)
+	if len(msg) > 3:
+	    print "We have a channel message! - W00T!!!"
+	    nick_name = string.lstrip(msg[0][:string.find(msg[0],"!")], ':')
+	    if string.lstrip(msg[3], ':') == '!say':
+		print "We need to say something :P"
+		message = ' '.join(msg[4:])
+		irccommand("PRIVMSG " + CHANNEL + " :" + message)
+	    if string.lstrip(msg[3], ':') == '!topic':
+		if len(msg) > 4:
+		    print "Changing Topic"
+		    message = ' '.join(msg[4:])
+		    print "The new topic will be: " + message
+		    irccommand("TOPIC " + CHANNEL + " :" + message)
 		else:
-		    irccommand("KICK " + CHANNEL + " " + msg[4] + " :You've being a BAD boy!")
+		    # We can ignore it
+	    if string.lstrip(msg[3], ':') == '!kick':
+		print "Someone's being bad, I need to kick!"
+		#if msg[4] != '':
+		if len(msg) > 4:
+		    irccommand("PRIVMSG " + CHANNEL + " :Oh someones being bad! LETS KICK!")
 
-		irccommand("PRIVMSG " + CHANNEL + " :" + nick_name + ", your dirty work is done!")
-	    else:
-		irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick <nick> [Optional Message]")
-	if string.lstrip(msg[3], ':') == '!cycle':
-	    print "Cycling!"
-	    irccommand("PRIVMSG " + CHANNEL + " :Okie Doke!")
-	    irccommand("PART " + CHANNEL)
-	    irccommand("JOIN " + CHANNEL)
-	    irccommand("PRIVMSG " + CHANNEL + " :Did you miss me?")
-	if string.lstrip(msg[3], ':') == '!quit':
-	    print "It's a quit"
-	    irccommand("QUIT :Quit from " + nick_name)
-	    print "Sent quit message, exiting"
-	    sys.exit()
+		    #if msg[5] != '':
+		    if len(msg) > 5:
+			message = ' '.join(msg[5:])
+			irccommand("KICK " + CHANNEL + " " + msg[4] + " :" + message)
+		    else:
+			irccommand("KICK " + CHANNEL + " " + msg[4] + " :You've being a BAD boy!")
+
+		    irccommand("PRIVMSG " + CHANNEL + " :" + nick_name + ", your dirty work is done!")
+		else:
+		    irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick <nick> [Optional Message]")
+	    if string.lstrip(msg[3], ':') == '!cycle':
+		print "Cycling!"
+		irccommand("PRIVMSG " + CHANNEL + " :Okie Doke!")
+		irccommand("PART " + CHANNEL)
+		irccommand("JOIN " + CHANNEL)
+		irccommand("PRIVMSG " + CHANNEL + " :Did you miss me?")
+	    if string.lstrip(msg[3], ':') == '!quit':
+		print "It's a quit"
+		irccommand("QUIT :Quit from " + nick_name)
+		print "Sent quit message, exiting"
+		sys.exit()
+	else:
+	# Somethings wrong with the server but yeah, we can save running some code
     if msg[2] == 'KICK':
     	print "Oh yay it worked!"
 	#More to come here
