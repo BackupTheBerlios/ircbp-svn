@@ -39,10 +39,10 @@ GPL Document can also be found in the same directory as this file as "LICENSE"
 <body> 
 <div id="masthead"> 
   <h1 id="siteName">IRCbp - The IRC Bot Project </h1> 
-  <!--<div id="globalNav"> 
-    <a href="#">global link</a> | <a href="#">global link</a> | <a href="#">global
+  <div id="globalNav"> 
+    <a href="index.php">Homepage</a> | <a href="svn.php">SVN Information</a><!-- | <a href="#">global
     link</a> | <a href="#">global link</a> | <a href="#">global link</a> | <a href="#">global
-    link</a> | <a href="#">global link</a> 
-  </div>--> 
+    link</a> | <a href="#">global link</a> -->
+  </div>
 </div> 
 <!-- end masthead --> 

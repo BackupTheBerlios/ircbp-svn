@@ -28,11 +28,12 @@ GPL Document can also be found in the same directory as this file as "LICENSE"
   <div id="search">  </div> 
   <div id="sectionLinks"> 
     <ul> 
-      <li><a href="http://ircbp.berlios.de/index2.php">Home Page </a></li> 
+      <li><a href="index.php">Home Page </a></li> 
+      <li><a href="svn.php">SVN Information </a></li>
       <li><a href="http://developer.berlios.de/projects/ircbp/">Project Page </a></li>
-	  <li><a href="http://berlios.de">BerliOS Website</a></li> 
+<!--      <li><a href="http://berlios.de">BerliOS Website</a></li> 
       <li><a href="http://www.irchelp.org">IRChelp.org</a></li> 
-      <li><a href="http://www.python.org">Python.org</a></li>  
+      <li><a href="http://www.python.org">Python.org</a></li>  -->
     </ul> 
   </div> 
   <div class="relatedLinks"> 
@@ -51,9 +52,9 @@ GPL Document can also be found in the same directory as this file as "LICENSE"
 </div> 
 </div> 
 <div id="siteInfo"> 
-  <!--<img src="" width="44" height="22">--> <a href="http://developer.berlios.de/project/memberlist.php?group_id=2320">About Us</a> | <a href="#">Site
-  Map</a> | <a href="#">Privacy Policy</a> | <a href="#">Contact Us</a> | &copy;2004
-  Don't-Have-A-Company-Name-Yet, Inc.
+  <!--<img src="" width="44" height="22">--> <a href="#">About Us</a> | <a href="#">Site
+  Map</a> | <a href="#">Privacy Policy</a> | <a href="http://developer.berlios.de/project/memberlist.php?group_id=2320">Contact Us</a> | &copy;2004
+  The IRC Bot Project (Brian Pankey & Nigel Jones).  All Rights Reserved
 </div> 
 <br> 
 </body>
