@@ -43,13 +43,7 @@ def addchan(CHANNEL):
 # Introduce Users allowed to control "powerful" features
 # Features include !quit, !topic, !kick, !cycle
 
-#adduser('Nigel')
-#adduser('Jorge-Kersh')
-#adduser('ghetrino')
-#adduser('pankey')
-
-
-# Useage:
+# Usage:
 # addmask('nick!ident@host')
 addmask('*!*@nigel.user')
 addmask('*!*@ghettobp19.user')
@@ -72,12 +66,6 @@ SVRPASSWORD = ''
 
 # Nickname for the IRC Bot to use
 NICKNAME = 'IRCBP'
-
-# Channel for the IRC Bot to join on connect (only channel at this moment that it will listen to
-# Will be made into an array soon
-#CHANNEL = '#IRCBP'
-
-
 
 ### CODE STARTS HERE ###
 
@@ -148,7 +136,7 @@ def ischanmember(CHKCHANNEL):
     print "Starting the loop"
     while (len(channels)-1 >= x):
 	print "The loop is checking if we are in channels[" + str(x) + "] which is " + channels[x]
-	if channels[x] == CHKCHANNEL:
+	if string.upper(channels[x]) == string.upper(CHKCHANNEL):
 	    print "We are in it!"
 	    return 1
 	else:
@@ -187,11 +175,11 @@ while (1):
 	CHANNEL = msg[2]
 	if len(msg) > 3:
 	    print "We have a channel message! - W00T!!!"
-	    if string.lstrip(msg[3], ':') == '!say':
+	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!say'):
 		print "We need to say something :P"
 		message = ' '.join(msg[4:])
 		irccommand("PRIVMSG " + CHANNEL + " :" + message)
-	    if string.lstrip(msg[3], ':') == '!topic':
+	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!topic'):
 		if privcheck(HOSTMASK):
 		    if len(msg) > 4:
 			print "Changing Topic"
@@ -203,7 +191,7 @@ while (1):
 		else:
 		    # They don't have privledges!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
-	    if string.lstrip(msg[3], ':') == '!kick':
+	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!kick'):
 	    # msg[4] = channel
 	    # msg[5] = nickname
 	    # msg[6->] = reason
@@ -211,7 +199,7 @@ while (1):
 		    print "Someone's being bad, I need to kick!"
 		    #if msg[4] != '':
 		    if len(msg) > 4:
-			if ischanmember(msg[4]):
+			if ischanmember(string.upper(msg[4])):
 			    irccommand("PRIVMSG " + CHANNEL + " :Oh someones being bad! LETS KICK!")
 			    if len(msg) > 5:
 				#if msg[5] != '':
@@ -231,7 +219,7 @@ while (1):
 		else:
 		    # They don't have privledges!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
-	    if string.lstrip(msg[3], ':') == '!join':
+	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!join'):
 		print "Joining a channel!"
 		# Need to make sure that nick_name has in our privledged array
 		if privcheck(HOSTMASK):
@@ -250,7 +238,7 @@ while (1):
 			irccommand("PRIVMSG " + CHANNEL + " :Syntax error, correct syntax is: !join \x02<channel>\x02")
 		else:
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
-	    if string.lstrip(msg[3], ':') == '!cycle':
+	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!cycle'):
 		if privcheck(HOSTMASK):
 		    print "Cycling!"
 		    irccommand("PRIVMSG " + CHANNEL + " :Okie Doke!")
@@ -260,7 +248,7 @@ while (1):
 		else:
 		    # Oh dear they cycle our bot!
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
-	    if string.lstrip(msg[3], ':') == '!quit':
+	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!quit'):
 		if privcheck(HOSTMASK):
 		    print "It's a quit"
 		    irccommand("QUIT :Quit from " + nick_name)

@@ -20,3 +20,4 @@ NJ - 02/10/04 - Fixed Bug #2557 (IndexError: list index out of range - KICK)
 NJ - 02/10/04 - Importing Python module "fnmatch" - seems a nifty feature for wildcards etc
 NJ - 02/10/04 - Deleting masks_ircbp.py - the system has some flaws etc.
 NJ - 02/10/04 - Added new hostmask system, I KNOW ANOTHER ONE! - This one works a DREAM! - Uses fnmatch which I added to the imports, for a FS Matching checker it works SUPER well on plain text!
+NJ - 02/10/04 - Fixed bug #2556 (Comparing strings may fail because of case)
