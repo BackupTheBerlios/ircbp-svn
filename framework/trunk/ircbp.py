@@ -11,7 +11,6 @@
 # The main developers are:			#
 #	Nigel Jones <nigelj@users.berlios.de>	#
 #	Brian Pankey <pankey@users.berlios.de>	#
-#	Kyle Brooks <kyleb@users.berlios.de>	#
 #						#
 # Contributors names can be found in "CREDITS"	#
 #						#
@@ -25,65 +24,15 @@
 # GPL Document can also be found in the same directory as this file as "LICENSE"			#
 #########################################################################################################
 
-# Please scroll down to line 49 for start of configuration
+# Edit ircbpconfig.py for configuration
 
 # Imports for sockets etc
 
-import socket, string, sys, time, fnmatch
+import socket, string, sys, time, fnmatch, ircbpconfig
 
-# Introduce Arrays for Users/Channels and Prefixes
-
-privledged = []
-channels = []
-prefixes = []
-
-# Add functions for Users/Channels and Prefixes
-def addmask(HOSTMASK):
-    privledged.append(HOSTMASK)
-
-def addchan(CHANNEL):
-    channels.append(CHANNEL)
-
-def addprefix(PREFIX):
-    prefixes.append(PREFIX)
-
-#################################
-# CONFIGURATION STARTS HERE!	#
-#################################
-
-# Introduce Users allowed to control "powerful" features
-# Features include !quit, !topic, !kick, !cycle
-# Usage:
-# addmask('nick!ident@host')
-
-addmask('*!*@*')
-
-# Channels that the bot will join by default
-
-addchan('#IRCBP')
-
-# Bot Nickname and Realname (Must not be null) for the IRC Bot to use
-
-NICKNAME = 'IRCBP'
-REALNAME = 'The Internet Chat Relay Bot Project'
-
-# Add your bots nickserv password here, if none leave blank!
-
-NSPASSWORD = ''
-
-# Server Connection Details
-# In future this should be in a seperate file!
-
-# IRC Server DNS Name OR IP
-SERVER = 'irc.freenode.net'
-
-# Port IRC Server Listerns on
-PORT = 6667
-
-# Password for logining into the server (normally blank unless you have a special I:line)
-SVRPASSWORD = ''
-
-
+print ircbpconfig.PORT
+print ircbpconfig.SERVER
+    
 #################################################################################
 # CODE STARTS HERE								#
 # It is strongly recommended that you do not touch anything below this point!	#
@@ -95,7 +44,7 @@ IRC = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 #open a connection with the server
 def srvconnect():
-    IRC.connect((SERVER, PORT))
+    IRC.connect((ircbpconfig.SERVER, ircbpconfig.PORT))
 
 #simple function to send data through the socket
 def irccommand(command):
@@ -109,28 +58,28 @@ def dojoins():
     print "dojoins called"
     x = 0
     print "Starting the loop"
-    while (len(channels)-1 >= x):
-	print "The loop is going to join the channel in channels[" + str(x) + "] which is " + channels[x]
-	irccommand("JOIN " + channels[x])
+    while (len(ircbpconfig.channels)-1 >= x):
+	print "The loop is going to join the channel in ircbpconfig.channels[" + str(x) + "] which is " + ircbpconfig.channels[x]
+	irccommand("JOIN " + ircbpconfig.channels[x])
 	x = x+1
     print "dojoins Complete!"
 
 
 def sendnickserv():
-    if NSPASSWORD != "": 
-	irccommand("PRIVMSG NICKSERV :IDENTIFY " + NSPASSWORD)
+    if ircbpconfig.NSPASSWORD != "": 
+	irccommand("PRIVMSG NICKSERV :IDENTIFY " + ircbpconfig.NSPASSWORD)
 	time.sleep(10)
 
 #send login data (customizable)
 def irclogin():
     #We need to see if we need to send a password, so here we go
-    if SVRPASSWORD != "":
+    if ircbpconfig.SVRPASSWORD != "":
 	#Pass Required so lets send it!
-	irccommand("PASS " + SVRPASSWORD)
+	irccommand("PASS " + ircbpconfig.SVRPASSWORD)
 
     #IRC "USER" RFC says: "USER Username Hostname Servername :Realname"
-    irccommand("USER %s %s %s :%s" % (NICKNAME, NICKNAME, SERVER, REALNAME))
-    irccommand("NICK " + NICKNAME)
+    irccommand("USER %s %s %s :%s" % (ircbpconfig.NICKNAME, ircbpconfig.NICKNAME, ircbpconfig.SERVER, ircbpconfig.REALNAME))
+    irccommand("NICK " + ircbpconfig.NICKNAME)
 
 
 # This function will check if a user is in the privledged[x] array
@@ -139,10 +88,10 @@ def privcheck(USERHOSTTBC):
     print "User PrivCheck Called"
     x = 0
     print "starting the loop"
-    while (len(privledged)-1 >= x):
+    while (len(ircbpconfig.privledged)-1 >= x):
 	print "The data we got is: " + USERHOSTTBC
-	print "The loop is checking privledged[" + str(x) + "] which is " + privledged[x]
-	if fnmatch.fnmatch(USERHOSTTBC,privledged[x]):
+	print "The loop is checking ircbpconfig.privledged[" + str(x) + "] which is " + ircbpconfig.privledged[x]
+	if fnmatch.fnmatch(USERHOSTTBC,ircbpconfig.privledged[x]):
 	    print "OMG MATCH!"
 	    return 1
 	else:
@@ -157,9 +106,9 @@ def ischanmember(CHKCHANNEL):
     print "ischanmember Called"
     x = 0
     print "Starting the loop"
-    while (len(channels)-1 >= x):
-	print "The loop is checking if we are in channels[" + str(x) + "] which is " + channels[x]
-	if string.upper(channels[x]) == string.upper(CHKCHANNEL):
+    while (len(ircbpconfig.channels)-1 >= x):
+	print "The loop is checking if we are in ircbpconfig.channels[" + str(x) + "] which is " + ircbpconfig.channels[x]
+	if string.upper(ircbpconfig.channels[x]) == string.upper(CHKCHANNEL):
 	    print "We are in it!"
 	    return 1
 	else:
@@ -173,11 +122,11 @@ def remchan(CHANNEL):
     print "remchan Called"
     x = 0
     print "Starting the loop"
-    while (len(channels)-1 >= x):
-    	print "The loop is checking if the channel is a match @ channels[" + str(x) + "] which is " + channels[x]
-	if string.upper(channels[x]) == string.upper(CHANNEL):
+    while (len(ircbpconfig.channels)-1 >= x):
+    	print "The loop is checking if the channel is a match @ ircbpconfig.channels[" + str(x) + "] which is " + ircbpconfig.channels[x]
+	if string.upper(ircbpconfig.channels[x]) == string.upper(CHANNEL):
 	    print "We are in it!"
-	    del channels[x]
+	    del ircbpconfig.channels[x]
 	    return 1
 	else:
 	    #Keep going!
@@ -284,8 +233,8 @@ while (1):
 	    if string.upper(string.lstrip(msg[3], ':')) == string.upper('!list'):
 		    x = 0
 		    print "Starting the loop"
-		    while (len(channels)-1 >= x):
-			irccommand("PRIVMSG " + CHANNEL + " :I am in: " + channels[x])
+		    while (len(ircbpconfig.channels)-1 >= x):
+			irccommand("PRIVMSG " + CHANNEL + " :I am in: " + ircbpconfig.channels[x])
 			x = x+1
 		    
 	    # Join Command
@@ -299,7 +248,7 @@ while (1):
 			# Something has being provided, need to make sure it is a channel for now by only checking if it has # at the start
 			if msg[4][0] == "#":
 			    # All ok, adding the channel to the array, JOIN sent normally because we have gone past the time of dojoin
-			    addchan(msg[4])
+			    ircbpconfig.addchan(msg[4])
 			    irccommand("JOIN " + msg[4])
 			else:
 			    # Not a channel, return error

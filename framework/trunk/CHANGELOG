@@ -37,3 +37,7 @@ NJ - 10/10/04 - Added sendnickserv() so users can have their bot automatically i
 NJ - 13/11/04 - Added remchan() to reverse addchan()
 NJ - 13/11/04 - Added !list as a debugging tool (list channels the bot is on)
 NJ - 13/11/04 - Fixed !part to fix bug #2614 (!part Parts the wrong channel)
+NJ - 13/11/04 - Added ircbpconfig.py
+NJ - 13/11/04 - All the "lists" (I call them arrays) are now held in the new module.
+NJ - 13/11/04 - README fixed up.
+NJ - 13/11/04 - Added svn:ignore *.pyc because we don't need to import compiled python modules into the repo)
