@@ -152,12 +152,29 @@ srvconnect()
 irclogin()
 sendnickserv()
 dojoins()
-
+#
+#while (1):
+##    buffer = IRC.recv(1024)
+#    buffer = ''
+#    while (1):
+#        buffer += IRC.recv(1024)
+#        if '\n' in buffer:
+#            msg, buffer = buffer.split('\n', 1)
+#            yield msg
+buffer = ''
 while (1):
-    buffer = IRC.recv(1024)
+    buffer += IRC.recv(1024)
+    
+    if '\n' not in buffer:
+        continue
 
-    msg = string.split(buffer)
-    print buffer,
+    msg, buffer = buffer.split('\n', 1)
+
+    
+
+#    msg = string.split(buffer)
+#    print buffer,
+    print msg,
 
     if msg[0] == "PING": #check if server have sent ping command
         irccommand("PONG %s" % msg[1]) #answer with pong as per RFC 1459

@@ -62,3 +62,4 @@ NJ - 15/11/04 - Implemented all the DB calls but have not yet got a NSPASSWD col
 NJ - 16/11/04 - Add mysql table create file...
 NJ - 16/11/04 - Somehow an IF statement got replaced with "hey" so it wouldn't work :(
 NJ - 16/11/04 - After advise all the tabs have being removed
+NJ - 05/12/04 - Updating the newline handling in the buffer thanks to bdash in #newzealand on freenode ;)
