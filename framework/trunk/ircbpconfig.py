@@ -5,7 +5,7 @@
 # Some Portions are copyright to Gian Mario Tagliaretti, portions of his code will be replaced shortly	#
 #########################################################################################################
 
-# $Id: ircbp.py 42 2004-11-13 23:34:31Z nigelj $ #
+# $Id$ #
 
 #################################################
 # The main developers are:			#
@@ -54,17 +54,32 @@ db=_mysql.connect(host=sqlconfig.SQLHOST, user=sqlconfig.SQLUSER, passwd=sqlconf
 # Main configuration!
 
 db.query("""SELECT * from config LIMIT 0 , 1""")
+if db.errno() != 0:
+    print "MySQL has produced an error! Which is as follows:"
+    print db.errno() + " " + db.error()
+    print "Location of error:  Configuration Query"
+
 configprops=db.use_result().fetch_row()
 
 # Channels we join!
 
 db.query("""SELECT * from channels""")
+if db.errno() != 0:
+    print "MySQL has produced an error! Which is as follows:"
+    print db.errno() + " " + db.error()
+    print "Location of error:  Channels Query"
+    
 prechannels=db.store_result()
 channels=[c[0] for c in prechannels.fetch_row(prechannels.num_rows())]
 
 # Now from privledged users!
 
 db.query("""SELECT * from users""")
+if db.errno() != 0:
+    print "MySQL has produced an error! Which is as follows:"
+    print db.errno() + " " + db.error()
+    print "Location of error:  Users Query"
+    
 preprivs=db.store_result()
 privledged=[c[0] for c in preprivs.fetch_row(prechannels.num_rows())]
 

@@ -4,7 +4,8 @@
 
 DROP TABLE IF EXISTS `channels`;
 CREATE TABLE IF NOT EXISTS `channels` (
-  `channel` varchar(30) NOT NULL default ''
+  `channel` varchar(30) NOT NULL default '',
+  UNIQUE KEY `channel` (`channel`)
 ) TYPE=MyISAM;
 
 -- 
@@ -44,7 +45,8 @@ INSERT INTO `config` VALUES ('IRCBP', 'The Internet Relay Chat Bot Project', '',
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `mask` text NOT NULL
+  `mask` varchar(100) NOT NULL default '',
+  UNIQUE KEY `channel` (`mask`)
 ) TYPE=MyISAM;
 
 -- 
