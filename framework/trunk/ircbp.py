@@ -108,7 +108,7 @@ while (1):
 		    print "The new topic will be: " + message
 		    irccommand("TOPIC " + CHANNEL + " :" + message)
 		else:
-		    # We can ignore it
+		    print "This is work in process"
 	    if string.lstrip(msg[3], ':') == '!kick':
 		print "Someone's being bad, I need to kick!"
 		#if msg[4] != '':
@@ -137,7 +137,8 @@ while (1):
 		print "Sent quit message, exiting"
 		sys.exit()
 	else:
-	# Somethings wrong with the server but yeah, we can save running some code
+	    # Somethings wrong with the server but yeah, we can save running some code
+	    print "This is work in process"
     if msg[2] == 'KICK':
     	print "Oh yay it worked!"
 	#More to come here
