@@ -24,46 +24,50 @@
 # GPL Document can also be found in the same directory as this file as "LICENSE"			#
 #########################################################################################################
 
-# Introduce Arrays for Users/Channels and Prefixes
+# Don't edit the following "import" line!
 
 import _mysql
 
-privledged = []
-channels = []
-prefixes = []
+
 
 class mysqlconfig:
+    # EDIT THE FOLLOWING LINE TO THE NAME OF YOUR SQL HOST
     SQLHOST = 'localhost'
+    # EDIT THE FOLLOWING LINE TO THE NAME OF YOUR SQL USER
     SQLUSER = 'IRCBP'
+    # EDIT THE FOLLOWING LINE TO THE PASSWORD OF YOUR SQL USER
     SQLPASS = ''
+    # EDIT THE FOLLOWING LINE TO THE PORT USED BY YOUR SQL SERVER
     SQLPORT = 3306
+
+    
+# DO NOT EDIT ANYTHING MORE 
+
+# SQL Connection
 
 sqlconfig = mysqlconfig()
 
+# Connecting...
+
 db=_mysql.connect(host=sqlconfig.SQLHOST, user=sqlconfig.SQLUSER, passwd=sqlconfig.SQLPASS, db='IRCBP', port=sqlconfig.SQLPORT)
+
+# Main configuration!
 
 db.query("""SELECT * from config LIMIT 0 , 1""")
 configprops=db.use_result().fetch_row()
 
+# Channels we join!
 
-# Add functions for Users/Channels and Prefixes
-def addmask(HOSTMASK):
-    privledged.append(HOSTMASK)
+db.query("""SELECT * from channels""")
+prechannels=db.store_result()
+channels=[c[0] for c in prechannels.fetch_row(prechannels.num_rows())]
 
-def addchan(CHANNEL):
-    channels.append(CHANNEL)
+# Now from privledged users!
 
-def addprefix(PREFIX):
-    prefixes.append(PREFIX)
+db.query("""SELECT * from users""")
+preprivs=db.store_result()
+privledged=[c[0] for c in preprivs.fetch_row(prechannels.num_rows())]
 
-#CONFIG IS HERE
-    
-addmask('*!*@*')
-  
-# Channels that the bot will join by default
- 
-addchan('#IRCBP')
-addchan('#newzealand')
 
 # Bot Nickname and Realname (Must not be null) for the IRC Bot to use
     
@@ -89,3 +93,5 @@ SVRPASSWORD = configprops[0][5]
 # 1 if using a IRCd that you are connecting to is DancerIRCd (Freenode for example)
 # 0 if not
 DANCERMODE = int(configprops[0][6])
+
+

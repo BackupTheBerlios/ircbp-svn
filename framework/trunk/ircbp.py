@@ -34,11 +34,10 @@ import socket, string, sys, time, fnmatch, ircbpconfig
 # CODE STARTS HERE								#
 # It is strongly recommended that you do not touch anything below this point!	#
 #################################################################################
-
+#print ircbpconfig.SERVER
 # This basic socket will provide 1 connection to an IRC Server, in future we can most likely man it into an array
 # of sockets
 IRC = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 #open a connection with the server
 def srvconnect():
     IRC.connect((ircbpconfig.SERVER, ircbpconfig.PORT))
@@ -150,8 +149,7 @@ def remchan(CHANNEL):
 
 srvconnect()
 irclogin()
-sendnickserv()
-dojoins()
+
 #
 #while (1):
 ##    buffer = IRC.recv(1024)
@@ -321,6 +319,13 @@ while (1):
                 print "This is work in process"
         if msg[1] == 'KICK':
             irccommand("JOIN " + msg[2])
+        #Wait until end of MOTD to do nickserv stuff and joins.
+        if msg[1] == '376':
+            sendnickserv()
+            dojoins()
+        if msg[1] == '433':
+            ircbpconfig.NICKNAME = msg[3] + "_"
+            irccommand("NICK :" + ircbpconfig.NICKNAME)
         #Join Blocking Modes
         if msg[1] == '467' or msg[1] == '471' or msg[1] == '473' or msg[1] == '474' or msg[1] == '475':
             #We can't join channels that are invite only

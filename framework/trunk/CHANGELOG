@@ -69,3 +69,7 @@ NJ - 06/12/04 - Added NSPASSWORD to SQL
 NJ - 06/12/04 - Made a small optimization in ircbpconfig.py to incorporate the DB handling to end result into 1 line (instead of two) and only two varibles, looking for more to be made currently.
 NJ - 06/12/04 - Remade create_config.sql (this time from phpMyAdmin).  Now also drops existing table (if any) so PLEASE watch out!
 NJ - 06/12/04 - Limited SQL query to one result which should prevent problems.
+NJ - 07/12/04 - 433 numeric now handled - means that it append a _ to ircbpconfig.NICKNAME and send a NICK command to the server until it is allowed
+NJ - 07/12/04 - 376 numeric now handled - When the server gets the 376 (END OF MOTD) numeric it will THEN send Nickserv Identification and Join requested channels.
+NJ - 07/12/04 - Implemented db-based channels and users to the bot.
+NJ - 07/12/04 - Fixed comments in ircbpconfig.py (to make it clearer in the fact you only need to edit the SQL settings now).
