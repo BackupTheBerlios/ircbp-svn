@@ -171,13 +171,13 @@ while (1):
                                 print "Parting!"
                                 ircbpcommon.irccommand("PRIVMSG " + msg[4] + " :buh-bye now! =)")
                                 ircbpcommon.irccommand("PART " + msg[4] + " :Part from %s" % nick_name)
-                                remchan(msg[4])
+                                ircbpcommon.remchan(msg[4])
                             else:
                                 ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :" + msg[4] + " is not a channel")
                         else:
                             ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :buh-bye now! =)")
                             ircbpcommon.irccommand("PART " + CHANNEL + " :Part from %s" % nick_name)
-                            remchan(CHANNEL)
+                            ircbpcommon.remchan(CHANNEL)
                     else:
                         # Oh dear they tried to part our bot!
                         ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
@@ -210,7 +210,7 @@ while (1):
             #We can't join channels that are invite only
             print "The channel the bot just tried to join is invite only..."
             print "Removing from list"
-            remchan(msg[3])
+            ircbpcommon.remchan(msg[3])
             if len(ircbpconfig.CHANNELS) == 0:
                 print "There has being an error join the IRC Channels that you have provided,  and we cannot proceed."
                 print "For your convinence the bot has being cleanly shutdown"
@@ -219,14 +219,14 @@ while (1):
         if ircbpconfig.DANCERMODE:
             if msg[1] == '379':
                 print "We are being forwarded"
-                remchan(msg[3])
+                ircbpcommon.remchan(msg[3])
                 ircbpconfig.addchan(msg[4])
             #join blocking modes
             if msg[1] == '437' or msg[1] == '480' or msg[1] == '515':
                 #We can't join channels that are invite only
                 print "The channel the bot just tried to join is invite only..."
                 print "Removing from list"
-                remchan(msg[3])
+                ircbpcommon.remchan(msg[3])
                 if len(ircbpconfig.CHANNELS) == 0:
                     print "There has being an error join the IRC Channels that you have provided,  and we cannot proceed."
                     print "For your convinence the bot has being cleanly shutdown"
