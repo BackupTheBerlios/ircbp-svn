@@ -20,17 +20,36 @@
 # GPL Document can also be found in the same directory as this file as "LICENSE"			#
 #########################################################################################################
 
-import socket, string
-import sys, time
+# Imports for sockets etc
 
-#some user data, change as per your taste
+import socket, string, sys, time
+
+
+# Connection Details
+# In future this should be in a seperate file!
+
+# IRC Server DNS Name OR IP
 SERVER = 'irc.freenode.net'
+
+# Port IRC Server Listerns on
 PORT = 6667
+
+# Password for logining into the server (normally blank unless you have a special I:line)
 SVRPASSWORD = ''
+
+# Nickname for the IRC Bot to use
 NICKNAME = 'IRCBP'
+
+# Channel for the IRC Bot to join on connect (only channel at this moment that it will listen to
+# Will be made into an array soon
 CHANNEL = '#IRCBP'
 
-#open a socket to handle the connection
+
+### CODE STARTS HERE ###
+
+
+# This basic socket will provide 1 connection to an IRC Server, in future we can most likely man it into an array
+# of sockets
 IRC = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 #open a connection with the server
@@ -114,7 +133,6 @@ while (1):
 	    irccommand("PRIVMSG " + CHANNEL + " :Did you miss me?")
     	if string.lstrip(msg[3], ':') == '!quit':
 	    print "It's a quit"
-	    #This needs fixing, dunno how yet
 	    irccommand("QUIT :Quit from " + nick_name)
 	    print "Sent quit message, exiting"
 	    #irccommand(":QUIT Testing 123")
