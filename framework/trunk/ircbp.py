@@ -161,7 +161,7 @@ while (1):
     buffer = IRC.recv(1024)
 
     msg = string.split(buffer)
-    print buffer
+    print buffer,
 
     if msg[0] == "PING": #check if server have sent ping command
 	irccommand("PONG %s" % msg[1]) #answer with pong as per RFC 1459
