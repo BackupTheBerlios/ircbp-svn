@@ -46,7 +46,7 @@ include("includes/header.php");
     </p>
     <p>
 	Software can then be downloaded by performing the following command:  <br>
-		"svn checkout svn://svn.berlios.de/svnroot/repos/ircbp/framework/trunk"
+		"svn checkout svn://svn.berlios.de/ircbp/framework/trunk"
     </p>
   </div>
   <div class="story"> 
