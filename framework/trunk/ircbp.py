@@ -306,3 +306,8 @@ while (1):
     if msg[1] == 'KICK':
     	print "Oh yay it worked!"
 	#More to come here
+    if ircbpconfig.DANCERMODE:
+    	if msg[1] == "379":
+    	    print "We are being forwarded"
+	    remchan(msg[3])
+	    ircbpconfig.addchan(msg[4])

@@ -68,3 +68,7 @@ PORT = 6667
 
 # Password for logining into the server (normally blank unless you have a special I:line)
 SVRPASSWORD = ''
+
+# 1 if using a IRCd that you are connecting to is DancerIRCd (Freenode for example)
+# 0 if not
+DANCERMODE = 1
