@@ -79,19 +79,10 @@ GPL Document can also be found in the same directory as this file as "LICENSE"
     </ul> 
   </div> 
   <div class="relatedLinks"> 
-    <h3>Project Details</h3> 
-    <ul> 
-      <li><A href="http://developer.berlios.de/bugs/?group_id=2320"><IMG src="http://developer.berlios.de/images/ic/bug16b.png" BORDER="0" ALT="Bugs" border=0 width=20 height=20>&nbsp;Bug&nbsp;Tracker</A> ( <B>1</B> open bugs, <B>3</B> total )</li> 
-      <li><A href="http://developer.berlios.de/support/?group_id=2320"><IMG src="http://developer.berlios.de/images/ic/support16b.jpg" BORDER="0" ALT="Support" border=0 width=20 height=20>&nbsp;Tech&nbsp;Support</A> ( <B>0</B> open requests, <B>0</B> total )</li> 
-      <li><A href="http://developer.berlios.de/feature/?group_id=2320"><IMG src="http://developer.berlios.de/images/ic/support16b.jpg" BORDER="0" ALT="Feature Requests" border=0 width=20 height=20>&nbsp;Feature&nbsp;Requests</A> ( <B>0</B> open requests, <B>0</B> total )</li> 
-      <li><A href="http://developer.berlios.de/docman/?group_id=2320"><IMG src="http://developer.berlios.de/images/ic/docman16b.png" BORDER="0" ALT="Docs" border=0 width=20 height=20>&nbsp;Doc&nbsp;Manager</A></li> 
-      <li><A href="http://developer.berlios.de/patch/?group_id=2320"><IMG src="http://developer.berlios.de/images/ic/patch.png" BORDER="0" ALT="Patches" border=0 width=20 height=20>&nbsp;Patch&nbsp;Manager</A> ( <B>0</B> open patches, <B>0</B> total )</li> 
-      <li><A href="http://developer.berlios.de/mail/?group_id=2320"><IMG src="http://developer.berlios.de/images/ic/mail16b.png" BORDER="0" ALT="Mail Lists" border=0 width=20 height=20>&nbsp;Mailing&nbsp;Lists</A> ( <B>2</B> public lists )</li>
-	  <li><A href="http://developer.berlios.de/pm/?group_id=2320"><IMG src="http://developer.berlios.de/images/ic/taskman16b.png" BORDER="0" ALT="Tasks" border=0 width=20 height=20>&nbsp;Task&nbsp;Manager</A></li>
-	  <li><A HREF="http://developer.berlios.de/pm/task.php?group_project_id=607&group_id=2320&func=browse">&nbsp;&nbsp;-Bot Framework</A></li>
-	  <li><A href="http://developer.berlios.de/project/showfiles.php?group_id=2320"><IMG src="http://developer.berlios.de/images/ic/ftp16b.png" BORDER="0" ALT="FTP" border=0 width=20 height=20>&nbsp;Released&nbsp;Files</A></li>
-	  <!--<li><a href="#">Related Link</a></li>-->
-    </ul> 
+    <?php
+    //  BerliOS Stats
+    include("/home/users/nigelj/ircbp/projhtml.cache");
+    ?>
   </div> 
   <div class="relatedLinks"></div> 
   <div id="advert">
