@@ -262,6 +262,6 @@ while (1):
 	else:
 	    # Somethings wrong with the server but yeah, we can save running some code
 	    print "This is work in process"
-    if msg[2] == 'KICK':
+    if msg[1] == 'KICK':
     	print "Oh yay it worked!"
 	#More to come here

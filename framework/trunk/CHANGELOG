@@ -14,3 +14,6 @@ NJ - 01/10/04 - Added !join, no !part yet.
 NJ - 01/10/04 - Added privcheck call to: !topic, !quit and !cycle
 NJ - 01/10/04 - Made syntax errors have a bit of bold.
 NJ - 01/10/04 - Made !kick run as a multichannel system, e.g. !kick <channel> <nick> [messsage]
+BP - 02/10/04 - Made authorization more secure
+NJ - 02/10/04 - Added pankeys changelog entry for him
+NJ - 02/10/04 - Fixed Bug #2557 (IndexError: list index out of range - KICK)
