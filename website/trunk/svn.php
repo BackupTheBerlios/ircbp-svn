@@ -34,17 +34,7 @@ include("includes/header.php");
     <h3>Introduction</h3> 
     <p> 
     	The developers of IRCbp use SVN for the IRC Bot Project needs.  If you wish to download the latest source (that is yet to be released) please read on.
-	</p><p>
-  </div>
-  <div class="story">
-    <h3> WARNING </h3>
-    <p><b>
-    	The SVN Repository is currently in a state where it will be a "bad thing" to use it in production as we are introducing a new module in it for testing.<br><br>
-	
-	If you wish to take the risk please feel free to read below, or if you wish to download the 0.1.1 code read below and replace /framework/trunk for /framework/tags/REL-0.1.1
-	
-	ETA on /framework/trunk stability: UNKNOWN
-    </b></p>
+	</p>
   </div>
   <div class="story"> 
     <h3>First Time Access</h3> 
@@ -55,8 +45,11 @@ include("includes/header.php");
 	After downloading and building/installing the client software you need to make sure you have a reasonably new version of Python (we recommend 2.3.x) from <a href="http://www.python.org">The Python Homepage</a>
     </p>
     <p>
-	Software can then be downloaded by performing the following command:  <br>
-		"svn checkout svn://svn.berlios.de/ircbp/framework/trunk"
+	IRCbp Framework can be downloaded via SVN with:  <br>
+		"svn checkout svn://svn.berlios.de/ircbp/framework/trunk" <br>
+	While the IRCbp Bot (which is work in progress) can be downloaded via SVN at: <br>
+		"svn checkout svn://svn.berlios.de/ircbp/bot/trunk" <br><br>
+	<!--More information about the Framework and the Bot and their different uses can be found at <a href="projectinfo.php">Project Information</a>-->
     </p>
   </div>
   <div class="story"> 
