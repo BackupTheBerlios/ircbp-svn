@@ -128,7 +128,7 @@ while (1):
                     x = 0
                     print "Starting the loop"
                     while (len(ircbpconfig.channels)-1 >= x):
-                        ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :I am in: " + ircbpconfig.channels[x])
+                        ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :I am in: " + ircbpconfig.channels[x][0])
                         x = x+1
     
                 # Join Command
@@ -140,13 +140,13 @@ while (1):
                         # He/She is, making sure that they provided a channel - We will need a string check on this too.
                         if len(msg) > 4:
                             # Something has being provided, need to make sure it is a channel for now by only checking if it has # at the start
-                            if msg[4][0] == "#":
+                            if msg[4][0] == "#" and not ircbpcommon.ischanmember(msg[4]):
                                 # All ok, adding the channel to the array, JOIN sent normally because we have gone past the time of dojoin
                                 ircbpcommon.addchan(msg[4])
                                 ircbpcommon.irccommand("JOIN " + msg[4])
                             else:
                                 # Not a channel, return error
-                                ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :" + msg[4] + " is not a channel")
+                                ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :" + msg[4] + " is not a channel or I am already on it.")
                         else:
                             # Nothing provided, syntax error!
                             ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :Syntax error, correct syntax is: !join \x02<channel>\x02")
@@ -171,13 +171,13 @@ while (1):
                 if string.upper(string.lstrip(msg[3], ':')) == string.upper('!part'):
                     if ircbpcommon.privcheck(HOSTMASK, "A"):
                         if len(msg) > 4:
-                            if msg[4][0] == "#":
+                            if msg[4][0] == "#" and ircbpcommon.ischanmember(msg[4]):
                                 print "Parting!"
                                 ircbpcommon.irccommand("PRIVMSG " + msg[4] + " :buh-bye now! =)")
                                 ircbpcommon.irccommand("PART " + msg[4] + " :Part from %s" % nick_name)
                                 ircbpcommon.remchan(msg[4])
                             else:
-                                ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :" + msg[4] + " is not a channel")
+                                ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :" + msg[4] + " is not a channel or I am not in it.")
                         else:
                             ircbpcommon.irccommand("PRIVMSG " + CHANNEL + " :buh-bye now! =)")
                             ircbpcommon.irccommand("PART " + CHANNEL + " :Part from %s" % nick_name)
@@ -202,6 +202,16 @@ while (1):
                 print "This is work in process"
         if msg[1] == 'KICK':
             ircbpcommon.irccommand("JOIN " + msg[2])
+        if msg[1] == 'JOIN':
+            # Doing this for HOSTMASK auth method which is now in use
+            HOSTMASK = string.lstrip(msg[0], ':')
+            # Some functions still need nick_name so lets keep it!
+            nick_name = string.lstrip(msg[0][:string.find(msg[0],"!")], ':')
+            
+            if ircbpcommon.privcheck(HOSTMASK, "O"):
+                ircbpcommon.irccommand("MODE " + string.lstrip(msg[2], ':') + " +o " + nick_name)
+            else:
+                ircbpcommon.irccommand("PRIVMSG " + nick_name + " :Welcome to " + string.lstrip(msg[2], ':') + " please enjoy your stay!")
         #Wait until end of MOTD to do nickserv stuff and joins.
         if msg[1] == '376':
             ircbpcommon.sendnickserv()

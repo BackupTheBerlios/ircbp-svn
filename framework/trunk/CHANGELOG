@@ -164,3 +164,4 @@ NJ - 06/01/05 - Spotted new mistake with my changelog entries, it's 05 now not 0
 NJ - 07/01/05 - Readded the missing "addchan()"
 NJ - 07/01/05 - Fixed the thing that was dealing with making the channels sql query so it would work nicely... (copy and paste error)
 NJ - 15/01/05 - remchan instead of ircbpcommon.remchan  oppps!
+NJ - 15/01/05 - Made !join and !part to see if we are already in there... Fixes bug #2780 (channels.list will have more that one channel entry at times)

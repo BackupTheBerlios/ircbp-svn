@@ -59,7 +59,7 @@ def dojoins():
     print "Starting the loop"
     while (len(ircbpconfig.channels)-1 >= x):
         print "The loop is going to join the channel in ircbpconfig.channels[" + str(x) + "][0] which is " + ircbpconfig.channels[x][0]
-        irccommand("JOIN " + ircbpconfig.channels[0][0])
+        irccommand("JOIN " + ircbpconfig.channels[x][0])
         x = x+1
     print "dojoins Complete!"
 
@@ -70,7 +70,7 @@ def sendnickserv():
         time.sleep(10)
 
 def addchan(CHANNEL):
-    ircbpconfig.channels.append(CHANNEL)
+    ircbpconfig.channels.append([CHANNEL])
         
 # This function will check if a user is in the privledged[x] array
 

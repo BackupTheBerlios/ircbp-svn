@@ -13,3 +13,7 @@
 * Making privcheck(ircbpcommon.py) more advanced and using flag levels
 * Simplified the SQL Queries again
 * Made all the privcheck calls ask for certain levels...
+
+15/01/05 - nigelj
+* Added function to give users op's if their access flag is A or O
+* Appendage of channels was not working correctly/at all so it is now fixed
