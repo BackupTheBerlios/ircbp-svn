@@ -35,7 +35,17 @@ include("includes/header.php");
     <p> 
     	The developers of IRCbp use SVN for the IRC Bot Project needs.  If you wish to download the latest source (that is yet to be released) please read on.
 	</p><p>
-  </div> 
+  </div>
+  <div class="story">
+    <h3> WARNING </h3>
+    <p><b>
+    	The SVN Repository is currently in a state where it will be a "bad thing" to use it in production as we are introducing a new module in it for testing.<br><br>
+	
+	If you wish to take the risk please feel free to read below, or if you wish to download the 0.1.1 code read below and replace /framework/trunk for /framework/tags/REL-0.1.1
+	
+	ETA on /framework/trunk stability: UNKNOWN
+    </b></p>
+  </div>
   <div class="story"> 
     <h3>First Time Access</h3> 
     <p>
