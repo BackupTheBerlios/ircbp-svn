@@ -121,7 +121,7 @@ def remchan(CHANNEL):
     print "Starting the loop"
     while (len(ircbpconfig.channels)-1 >= x):
     	print "The loop is checking if the channel is a match @ ircbpconfig.channels[" + str(x) + "] which is " + ircbpconfig.channels[x]
-	if string.upper(ircbpconfig.channels[x]) == string.upper(CHANNEL):
+hey
 	    print "We are in it!"
 	    del ircbpconfig.channels[x]
 	    return 1
