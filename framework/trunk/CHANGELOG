@@ -161,3 +161,5 @@ NJ - 06/01/05 - Fixed missing comment in ircbpcommon.py
 NJ - 06/01/05 - Fixed problem CHANGELOG (3rd time lucky hopefully)
 NJ - 06/01/05 - Changed _mysql to MySQLdb (http://sourceforge.net/projects/mysql-python/)
 NJ - 06/01/05 - Spotted new mistake with my changelog entries, it's 05 now not 04 ;)
+NJ - 07/01/05 - Readded the missing "addchan()"
+NJ - 07/01/05 - Fixed the thing that was dealing with making the channels sql query so it would work nicely... (copy and paste error)

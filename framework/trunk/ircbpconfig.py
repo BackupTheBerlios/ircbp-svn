@@ -81,7 +81,7 @@ if db.errno() != 0:
     print "Location of error:  Users Query"
     
 preprivs=db.store_result()
-privledged=[c[0] for c in preprivs.fetch_row(prechannels.num_rows())]
+privledged=[c[0] for c in preprivs.fetch_row(preprivs.num_rows())]
 
 
 # Bot Nickname and Realname (Must not be null) for the IRC Bot to use

@@ -64,7 +64,9 @@ def sendnickserv():
     if ircbpconfig.NSPASSWORD != "": 
         irccommand("PRIVMSG NICKSERV :IDENTIFY " + ircbpconfig.NSPASSWORD)
         time.sleep(10)
-        
+  
+def addchan(CHANNEL):
+    ircbpconfig.channels.append(CHANNEL)      
 # This function will check if a user is in the privledged[x] array
 
 def privcheck(USERHOSTTBC):

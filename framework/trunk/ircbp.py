@@ -138,7 +138,7 @@ while (1):
                             # Something has being provided, need to make sure it is a channel for now by only checking if it has # at the start
                             if msg[4][0] == "#":
                                 # All ok, adding the channel to the array, JOIN sent normally because we have gone past the time of dojoin
-                                ircbpconfig.addchan(msg[4])
+                                ircbpcommon.addchan(msg[4])
                                 ircbpcommon.irccommand("JOIN " + msg[4])
                             else:
                                 # Not a channel, return error
