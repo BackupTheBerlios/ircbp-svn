@@ -3,7 +3,7 @@
 # Some Portions are copyright to Gian Mario Tagliaretti, portions of his code will be replaced shortly	#
 #########################################################################################################
 
-# $Id #
+# $Id$ #
 
 #################################################
 # The main developers are:			#
@@ -26,6 +26,7 @@
 
 import socket, string, sys, time
 
+privledged = []
 
 # Connection Details
 # In future this should be in a seperate file!
@@ -46,6 +47,8 @@ NICKNAME = 'IRCBP'
 # Will be made into an array soon
 CHANNEL = '#IRCBP'
 
+privledged.append('Nigel')
+privledged.append('Jorge-Kersh')
 
 ### CODE STARTS HERE ###
 
@@ -76,6 +79,22 @@ def irclogin(nickname, username='pbot', password = SVRPASSWORD, realname='Nigels
     #IRC "USER" RFC says: "USER Username Hostname Servername :Realname"
     irccommand("USER %s %s %s %s" % (username, hostname, servername, realname))
     irccommand("NICK " + nickname)
+
+def privcheck(USERTBC):
+    print "User PrivCheck Called"
+    x = 0
+    print "starting the loop"
+    while (len(privledged)-1 >= x):
+	print "The loop is checking privledged[" + str(x) + "] which is " + privledged[x]
+	if privledged[x] == USERTBC:
+	    print "OMG MATCH!"
+	    return 1
+	else:
+	    x = x+1
+	    print "NOT A MATCH!"
+    return 0
+    print "No Matches"
+
 
 srvconnect()
 irclogin(NICKNAME)
@@ -112,21 +131,25 @@ while (1):
 		else:
 		    print "This is work in process"
 	    if string.lstrip(msg[3], ':') == '!kick':
-		print "Someone's being bad, I need to kick!"
-		#if msg[4] != '':
-		if len(msg) > 4:
-		    irccommand("PRIVMSG " + CHANNEL + " :Oh someones being bad! LETS KICK!")
+		if privcheck(nick_name) == 1:
+		    print "Someone's being bad, I need to kick!"
+		    #if msg[4] != '':
+		    if len(msg) > 4:
+			irccommand("PRIVMSG " + CHANNEL + " :Oh someones being bad! LETS KICK!")
 
-		    #if msg[5] != '':
-		    if len(msg) > 5:
-			message = ' '.join(msg[5:])
-			irccommand("KICK " + CHANNEL + " " + msg[4] + " :" + message)
+			#if msg[5] != '':
+			if len(msg) > 5:
+			    message = ' '.join(msg[5:])
+			    irccommand("KICK " + CHANNEL + " " + msg[4] + " :" + message)
+			else:
+			    irccommand("KICK " + CHANNEL + " " + msg[4] + " :You've being a BAD boy!")
+
+			irccommand("PRIVMSG " + CHANNEL + " :" + nick_name + ", your dirty work is done!")
 		    else:
-			irccommand("KICK " + CHANNEL + " " + msg[4] + " :You've being a BAD boy!")
-
-		    irccommand("PRIVMSG " + CHANNEL + " :" + nick_name + ", your dirty work is done!")
+			irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick <nick> [Optional Message]")
 		else:
-		    irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick <nick> [Optional Message]")
+		    # They don't have privledges!
+		    irccommand("PRIVMSG " + CHANNEL + " :NO PRIVLEDGES TO KICK!")
 	    if string.lstrip(msg[3], ':') == '!cycle':
 		print "Cycling!"
 		irccommand("PRIVMSG " + CHANNEL + " :Okie Doke!")
