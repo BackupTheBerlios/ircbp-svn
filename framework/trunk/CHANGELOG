@@ -45,3 +45,8 @@ NJ - 13/11/04 - Found a problem with all the commands, it was checking for NICKN
 NJ - 13/11/04 - Cleaned up some debug stuff I added when I was having trouble with the module.
 NJ - 13/11/04 - Added "DANCERMODE" so we can seperate Dancer only behaviour.  Planning to do this for other IRCds.
 NJ - 13/11/04 - Bot now supports DancerIRCd forwarding.  Fixes bug #2782 (Bot doesn't follow Dancer Forwarding)
+NJ - 14/11/04 - Added new lines to ircbpconfig.py
+NJ - 14/11/04 - Added checking for 'join-blocking' numerics
+NJ - 14/11/04 - Made handling for 'join-blocking' numerics check if that was the last channel, if so it will quit cleaning fixing bug #2781 (Bot doesn't phase RAW messages)
+NJ - 14/11/04 - Added the DancerIRCd 'join-blocking' numerics
+NJ - 14/11/04 - Fixed some of the tabbing

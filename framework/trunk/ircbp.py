@@ -306,8 +306,30 @@ while (1):
     if msg[1] == 'KICK':
     	print "Oh yay it worked!"
 	#More to come here
+    #Join Blocking Modes
+    if msg[1] == '467' or msg[1] == '471' or msg[1] == '473' or msg[1] == '474' or msg[1] == '475':
+	#We can't join channels that are invite only
+	print "The channel the bot just tried to join is invite only..."
+	print "Removing from list"
+	remchan(msg[3]).
+	if len(ircbpconfig.CHANNELS) == 0:
+	    print "There has being an error join the IRC Channels that you have provided,  and we cannot proceed."
+	    print "For your convinence the bot has being cleanly shutdown"
+	    irccommand("QUIT :Bot Error")
+	    sys.exit()
     if ircbpconfig.DANCERMODE:
-    	if msg[1] == "379":
-    	    print "We are being forwarded"
+	if msg[1] == '379':
+	    print "We are being forwarded"
 	    remchan(msg[3])
 	    ircbpconfig.addchan(msg[4])
+	#join blocking modes
+	if msg[1] == '437' or msg[1] == '480' or msg[1] == '515':
+	    #We can't join channels that are invite only
+	    print "The channel the bot just tried to join is invite only..."
+	    print "Removing from list"
+	    remchan(msg[3])
+	    if len(ircbpconfig.CHANNELS) == 0:
+		print "There has being an error join the IRC Channels that you have provided,  and we cannot proceed."
+		print "For your convinence the bot has being cleanly shutdown"
+		irccommand("QUIT :Bot Error")
+		sys.exit()
