@@ -11,3 +11,4 @@ NJ - 01/10/04 - Implementing Changelog and used SVN History to create past event
 NJ - 01/10/04 - Starting a system like the Privledge system to join Multiple Channels.
 NJ - 01/10/04 - Channel System is done, needs lots of testing.  I think i'll leave programming at that for now.
 NJ - 01/10/04 - Added !join, no !part yet.
+NJ - 01/10/04 - Added privcheck call to: !topic, !quit and !cycle

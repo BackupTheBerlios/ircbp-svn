@@ -180,13 +180,17 @@ while (1):
 		message = ' '.join(msg[4:])
 		irccommand("PRIVMSG " + CHANNEL + " :" + message)
 	    if string.lstrip(msg[3], ':') == '!topic':
-		if len(msg) > 4:
-		    print "Changing Topic"
-		    message = ' '.join(msg[4:])
-		    print "The new topic will be: " + message
-		    irccommand("TOPIC " + CHANNEL + " :" + message)
+		if privcheck(nick_name):
+		    if len(msg) > 4:
+			print "Changing Topic"
+			message = ' '.join(msg[4:])
+			print "The new topic will be: " + message
+			irccommand("TOPIC " + CHANNEL + " :" + message)
+		    else:
+			print "This is work in process"
 		else:
-		    print "This is work in process"
+		    # They don't have privledges!
+		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 	    if string.lstrip(msg[3], ':') == '!kick':
 		if privcheck(nick_name) == 1:
 		    print "Someone's being bad, I need to kick!"
@@ -206,7 +210,7 @@ while (1):
 			irccommand("PRIVMSG " + CHANNEL + " :SYNTAX IS: !kick <nick> [Optional Message]")
 		else:
 		    # They don't have privledges!
-		    irccommand("PRIVMSG " + CHANNEL + " :NO PRIVLEDGES TO KICK!")
+		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 	    if string.lstrip(msg[3], ':') == '!join':
 		print "Joining a channel!"
 		# Need to make sure that nick_name has in our privledged array
@@ -227,16 +231,24 @@ while (1):
 		else:
 		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 	    if string.lstrip(msg[3], ':') == '!cycle':
-		print "Cycling!"
-		irccommand("PRIVMSG " + CHANNEL + " :Okie Doke!")
-		irccommand("PART " + CHANNEL)
-		irccommand("JOIN " + CHANNEL)
-		irccommand("PRIVMSG " + CHANNEL + " :Did you miss me?")
+		if privcheck(nick_name):
+		    print "Cycling!"
+		    irccommand("PRIVMSG " + CHANNEL + " :Okie Doke!")
+		    irccommand("PART " + CHANNEL)
+		    irccommand("JOIN " + CHANNEL)
+		    irccommand("PRIVMSG " + CHANNEL + " :Did you miss me?")
+		else:
+		    # Oh dear they cycle our bot!
+		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 	    if string.lstrip(msg[3], ':') == '!quit':
-		print "It's a quit"
-		irccommand("QUIT :Quit from " + nick_name)
-		print "Sent quit message, exiting"
-		sys.exit()
+		if privcheck(nick_name):
+		    print "It's a quit"
+		    irccommand("QUIT :Quit from " + nick_name)
+		    print "Sent quit message, exiting"
+		    sys.exit()
+		else:
+		    # Oh dear they quit our bot!
+		    irccommand("PRIVMSG " + CHANNEL + " :No privledges for this command!")
 	else:
 	    # Somethings wrong with the server but yeah, we can save running some code
 	    print "This is work in process"
