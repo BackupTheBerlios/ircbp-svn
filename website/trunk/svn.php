@@ -39,24 +39,27 @@ include("includes/header.php");
   <div class="story"> 
     <h3>First Time Access</h3> 
     <p>
-    	If you are accessing our SVN Repository for the first time you must have the Subversion client software installed on your computer.  Debian users can download and install the needed software by performing: "apt-get install subversion".  Other users will need to download the source and compile it or you other precompiled builds from http://subversion.tigris.org
-	
-	After downloading and building/installing the client software you need to make sure you have a reasonably new version of Python (we recommend 2.3.x) from http://www.python.org
-	
-	Software can then be downloaded by performing the following command:  
+    	If you are accessing our SVN Repository for the first time you must have the Subversion client software installed on your computer.  Debian users can download and install the needed software by performing: "apt-get install subversion".  Other users will need to download the source and compile it or you other precompiled builds from <a href="http://subversion.tigris.org">The Subversion Homepage</a>
+    </p>
+    <p>
+	After downloading and building/installing the client software you need to make sure you have a reasonably new version of Python (we recommend 2.3.x) from <a href="http://www.python.org">The Python Homepage</a>
+    </p>
+    <p>
+	Software can then be downloaded by performing the following command:  <br>
 		"svn checkout svn://svn.berlios.de/svnroot/repos/ircbp/framework/trunk"
+    </p>
   </div>
   <div class="story"> 
     <h3>Continued Updating</h3> 
     <p>
-    	Downloaded source should be updated often (thats if you want to) by issuing the following command:
+    	Downloaded source should be updated often (thats if you want to) by issuing the following command:<br>
 		"svn update" or "svn up"
     </p>
   </div>
   <div class="story">
     <h3>Web Browser Access</h3>
     <p>
-    	The IRCbp SVN Sources can be accessed via your web browser by going to: http://svn.berlios.de/viewcvs/ircbp
+    	The IRCbp SVN Sources can be accessed via your web browser by going to: <a href="http://svn.berlios.de/viewcvs/ircbp">http://svn.berlios.de/viewcvs/ircbp</a>
     </p>
   </div>
 </div> 
