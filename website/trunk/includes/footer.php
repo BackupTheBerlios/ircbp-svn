@@ -39,7 +39,12 @@ GPL Document can also be found in the same directory as this file as "LICENSE"
   <div class="relatedLinks"> 
     <?php
     //  BerliOS Stats
-    include("/home/users/nigelj/ircbp/projhtml.cache");
+    $filename = "/home/users/nigelj/ircbp/projhtml.cache";
+    include($filename);
+    // From php.net
+    if (file_exists($filename)) {
+        echo "Updated: " . date ("F d Y H:i:s.", filemtime($filename));
+    }
     ?>
   </div> 
   <div class="relatedLinks"></div> 
