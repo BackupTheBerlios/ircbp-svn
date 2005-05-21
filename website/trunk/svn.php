@@ -45,9 +45,14 @@ include("includes/header.php");
 	After downloading and building/installing the client software you need to make sure you have a reasonably new version of Python (we recommend 2.3.x) from <a href="http://www.python.org">The Python Homepage</a>
     </p>
     <p>
-	IRCbp Framework can be downloaded via SVN with:  <br>
-		"svn checkout svn://svn.berlios.de/ircbp/framework/trunk" <br>
-	While the IRCbp Bot (which is work in progress) can be downloaded via SVN at: <br>
+	The development on the IRCBP Framework and bot was ceased in Feb 2005, an archive of it can be downloaded 
+	via SVN with:  <br>
+		"svn checkout svn://svn.berlios.de/ircbp/framework-old/trunk" <br>
+		"svn checkout svn://svn.berlios.de/ircbp/bot-old/trunk" <br>
+		respectfully.
+    </p>
+    <p>
+	The replacement of the old versions will be able to be downloaded from SVN by: <br>
 		"svn checkout svn://svn.berlios.de/ircbp/bot/trunk" <br><br>
 	<!--More information about the Framework and the Bot and their different uses can be found at <a href="projectinfo.php">Project Information</a>-->
     </p>
