@@ -43,7 +43,7 @@ GPL Document can also be found in the same directory as this file as "LICENSE"
     include($filename);
     // From php.net
     if (file_exists($filename)) {
-        echo "Updated: " . date ("F d Y H:i:s.", filemtime($filename));
+        echo "Stats Updated: " . date ("F d Y H:i:s.", filemtime($filename));
     }
     ?>
   </div> 
