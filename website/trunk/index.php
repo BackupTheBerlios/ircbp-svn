@@ -2,9 +2,11 @@
 /*
 (C) Nigel Jones, Brian Pankey and contributors to The IRC Bot Project, All Rights Reserved, 2004
 
+*/
 
-$Id$
+$version = "$Id$"
 
+/*
 
 The main developers are:
 	Nigel Jones <nigelj@users.berlios.de>
