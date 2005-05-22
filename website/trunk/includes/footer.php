@@ -62,6 +62,12 @@ GPL Document can also be found in the same directory as this file as "LICENSE"
   Map</a> | <a href="#">Privacy Policy</a> | <a href="http://developer.berlios.de/project/memberlist.php?group_id=2320">Contact Us</a> | &copy;2004
   The IRC Bot Project (Brian Pankey & Nigel Jones).  All Rights Reserved<br>
   Page Last Updated: <?php echo $version; ?>
+  
+  <p>
+     <a href="http://jigsaw.w3.org/css-validator/check/referer">
+       <img style="border:0;width:88px;height:31px" src="images/vcss.png" alt="Valid CSS!">
+     </a>
+  </p>
 </div> 
 <br> 
 </body>
