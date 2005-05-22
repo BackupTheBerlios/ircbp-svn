@@ -29,6 +29,7 @@ GPL Document can also be found in the same directory as this file as "LICENSE"
   <div id="sectionLinks"> 
     <ul> 
       <li><a href="index.php">Home Page </a></li> 
+      <li><a href="devinfo.php">Development Information</a></li>
       <li><a href="svn.php">SVN Information </a></li>
       <li><a href="http://developer.berlios.de/projects/ircbp/">Project Page </a></li>
 <!--      <li><a href="http://berlios.de">BerliOS Website</a></li> 

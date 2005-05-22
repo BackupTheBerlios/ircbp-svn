@@ -2,10 +2,11 @@
 /*
 (C) Nigel Jones, Brian Pankey and contributors to The IRC Bot Project, All Rights Reserved, 2004
 
+$Id: svn.php 75 2005-05-21 20:30:57Z nigelj $
+
 */
 
-$version = "$Id$";
-$title = "Home";
+$title = "Development Information";
 
 /*
 
@@ -30,26 +31,34 @@ include("includes/header.php");
 ?>
 <div id="content"> 
   <div id="breadCrumb"> 
-    <a href="http://ircbp.berlios.de">IRCbp</a> / Home</div> 
-  <h2 id="pageName">Welcome to IRCbp's Homepage </h2> 
+    <a href="http://ircbp.berlios.de">IRCbp</a> / Development Information</div> 
+  <h2 id="pageName">Welcome to IRCbp Development Information</h2> 
   <div class="feature"> 
     <img src="ircbp-mockup.gif" alt=""> 
     <h3>Introduction</h3> 
     <p> 
-    IRCbp is a free, open source, Python based IRC Bot.  It consists of a single script (in the future, two files may be used; one for config options, one for the actual bot) which does all of the work.  This Project was created for the sole purpose of aiding in us, the developers, learning the python scripting language. 
-	</p><p>
-  </div> 
-<div class="story"> 
-    <h3>Project News</h3> 
-<!--    <p> 
-    more text here
-    </p> -->
-    <?php
-    	include("/home/users/nigelj/ircbp/projnews.cache");
-    ?> 
+    	IRCbp now provides development information for all of our current/upcoming/old releases.  You may select the release that you wish to have information for on the left.
+	</p>
   </div>
-</div> 
-<!--end content --> 
-<?php
+  <?php
+  	if ($HTTP_GET_VARS['v'] == '0.1.0')
+	{
+	    include("devinfo/0-1-0.php");
+	}
+	elseif ($HTTP_GET_VARS['v'] == '0.1.1')
+	{
+	    include("devinfo/0-1-1.php");
+	}
+	elseif ($HTTP_GET_VARS['v'] == ('0.2.0' || 'zilda'))
+	{
+	    include("devinfo/0-2-0.php");
+	}
+	else
+	{
+	    include("devinfo/0-2-0.php");
+	}
+    ?>
+</div>
+<?
 include("includes/footer.php");
 ?>

@@ -5,6 +5,7 @@
 */
 
 $version = "$Id$";
+$title = "SVN Information";
 
 /*
 

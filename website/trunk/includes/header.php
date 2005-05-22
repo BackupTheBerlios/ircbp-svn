@@ -31,7 +31,7 @@ GPL Document can also be found in the same directory as this file as "LICENSE"
 <!-- DW6 -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>The IRC Bot Project</title>
+<title>The IRC Bot Project - <? echo $title; ?></title>
 <link rel="stylesheet" href="ircbp.css" type="text/css">
 </head>
 <!-- The structure of this file is exactly the same as 2col_rightNav.html;
@@ -40,8 +40,8 @@ GPL Document can also be found in the same directory as this file as "LICENSE"
 <div id="masthead"> 
   <h1 id="siteName">IRCbp - The IRC Bot Project </h1> 
   <div id="globalNav"> 
-    <a href="index.php">Home Page</a> | <a href="svn.php">SVN Information</a><!-- | <a href="#">global
-    link</a> | <a href="#">global link</a> | <a href="#">global link</a> | <a href="#">global
+    <a href="index.php">Home Page</a> | <a href="devinfo.php">Development Information</a> | <a href="svn.php">SVN Information</a>
+    <!-- | <a href="#">global link</a> | <a href="#">global link</a> | <a href="#">global link</a> | <a href="#">global
     link</a> | <a href="#">global link</a> -->
   </div>
 </div> 
