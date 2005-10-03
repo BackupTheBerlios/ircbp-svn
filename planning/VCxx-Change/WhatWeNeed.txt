@@ -1,0 +1,15 @@
+What We Need To Do
+++++++++++++++++++
+
+
+AIM:
+
+Create a portable C++ Library that can be used for IRC Bots, while also for general while also been able to provide a Library to IRC Clients!
+
+
+
+Library Type:
+
+We can either use a .lib, or a .dll (or provide both) I'm gonna start with the latter, but we can always swap back at some other point.
+
+<add here>
