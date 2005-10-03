@@ -1,0 +1,3 @@
+Different areas of planning will be discussed in this folder, this includes how we are actually going to code the project from here on in, may also include sample code....
+
+VCxx-Change\ - Planning to change to VC++6 as language for IRCbp
